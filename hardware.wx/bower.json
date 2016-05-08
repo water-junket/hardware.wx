@@ -1,5 +1,5 @@
 {
-  "name": "gulpTest",
+  "name": "hardware.wx",
   "version": "0.0.1",
   "dependencies": {
     "avalon": "~1.5.5",

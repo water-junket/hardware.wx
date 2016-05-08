@@ -19,7 +19,7 @@ gulp.task('pub', ['build'], function () {
 		port: 8710,
 		notify: false,//右上角的小提示
     	server: {
-        	baseDir: './dist'
+        	baseDir: './WebContent'
     	}
 	});
 });
@@ -39,7 +39,7 @@ gulp.task('dev', ['build-less'], function () {
 
 //清空dist目录
 gulp.task('clean', function() {
-	return gulp.src(['dist'], {read: false})
+	return gulp.src(['WebContent/*.html','WebContent/script/*.js','WebContent/style/*.css','WebContent/img/**/*.{png,jpg,gif,svg}'], {read: false})
 		.pipe(clean());
 });
 
