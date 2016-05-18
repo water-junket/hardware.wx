@@ -39,7 +39,7 @@ gulp.task('dev', ['build-less'], function () {
 
 //清空dist目录
 gulp.task('clean', function() {
-	return gulp.src(['WebContent/*.html','WebContent/script/*.js','WebContent/style/*.css','WebContent/img/**/*.{png,jpg,gif,svg}'], {read: false})
+	return gulp.src(['WebContent/*.html','WebContent/{script,lib,style}/*.{js,css}','WebContent/img/**/*.{png,jpg,gif,svg}'], {read: false})
 		.pipe(clean());
 });
 
@@ -62,26 +62,26 @@ gulp.task('build', ['clean', 'build-less'], function(){
 	//图片部分，排除以_开头的文件，以备雪碧图用
 	gulp.src('src/img/**/!(_)*.{png,jpg,gif,svg}')
 	.pipe(cache(imagemin()))
-	.pipe(gulp.dest('dist/img'));
+	.pipe(gulp.dest('WebContent/img'));
 
 	//字体部分
 	gulp.src('src/fonts/*.*')
-	.pipe(gulp.dest('dist/fonts'));
+	.pipe(gulp.dest('WebContent/fonts'));
 
 	//数据部分和图标
 	gulp.src(['src/*.json','src/favicon.ico'])
-	.pipe(gulp.dest('dist'));
+	.pipe(gulp.dest('WebContent'));
 
 	//AMD模块化的库
 	gulp.src('src/lib/*.js')
-	.pipe(uglify())  
-	.pipe(gulp.dest('dist/lib'));
+	.pipe(uglify())
+	.pipe(gulp.dest('WebContent/lib'));
 
 	gulp.src('src/index.html')
 	.pipe(useref())
-	.pipe(gulpif('*.js', uglify()))  
+	.pipe(gulpif('*.js', uglify()))
 	.pipe(gulpif('*.css', prefixer({browsers: ['last 2 versions', 'Android >= 4.4', 'IOS >= 8']})))
 	.pipe(gulpif('*.css', minifyCss()))
 	.pipe(revAll.revision())
-	.pipe(gulp.dest('dist'));
+	.pipe(gulp.dest('WebContent'));
 });
