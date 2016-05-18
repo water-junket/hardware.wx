@@ -39,7 +39,7 @@ gulp.task('dev', ['build-less'], function () {
 
 //清空dist目录
 gulp.task('clean', function() {
-	return gulp.src(['WebContent/*.html','WebContent/{script,lib,style}/*.{js,css}','WebContent/img/**/*.{png,jpg,gif,svg}'], {read: false})
+	return gulp.src(['WebContent/**/*.html','WebContent/**/{script,lib,style,img}/*.*'], {read: false})
 		.pipe(clean());
 });
 
