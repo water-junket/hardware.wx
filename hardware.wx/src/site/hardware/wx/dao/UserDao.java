@@ -20,9 +20,9 @@ public class UserDao {
 
 	public int insert(User u){
 		String sql = "insert into tbl_user(name,openid) values(?,?)";
-		Object[] params = new Object[] {u.getName(), u.getOpenid()};
+		Object[] param = new Object[] {u.getName(), u.getOpenid()};
 		try{
-			jdbcTemplate.update(sql, params);
+			jdbcTemplate.update(sql, param);
 			sql = "select ident_current('tbl_user')";
 			return jdbcTemplate.queryForObject(sql, Integer.class);
 		}catch(DataAccessException e){

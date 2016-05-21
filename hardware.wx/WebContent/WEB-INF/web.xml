@@ -4,28 +4,23 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
 	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
-	<display-name>gzm</display-name>
+	<display-name>hardware.wx</display-name>
 
 	<servlet>
-		<servlet-name>gzm</servlet-name>
+		<servlet-name>hardware.wx</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 		<async-supported>true</async-supported> 
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>gzm</servlet-name>
-		<url-pattern>*.html</url-pattern>
-	</servlet-mapping>
-
-	<servlet-mapping>
-		<servlet-name>gzm</servlet-name>
+		<servlet-name>hardware.wx</servlet-name>
 		<url-pattern>*.json</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>
-		<servlet-name>gzm</servlet-name>
-		<url-pattern>*.do</url-pattern>
+		<servlet-name>hardware.wx</servlet-name>
+		<url-pattern>*.img</url-pattern>
 	</servlet-mapping>
 
 	<filter>
@@ -46,17 +41,7 @@
 
 	<filter-mapping>
 		<filter-name>encodingFilter</filter-name>
-		<url-pattern>*.html</url-pattern>
-	</filter-mapping>
-
-	<filter-mapping>
-		<filter-name>encodingFilter</filter-name>
 		<url-pattern>*.json</url-pattern>
-	</filter-mapping>
-
-	<filter-mapping>
-		<filter-name>encodingFilter</filter-name>
-		<url-pattern>*.do</url-pattern>
 	</filter-mapping>
 
 	<session-config>

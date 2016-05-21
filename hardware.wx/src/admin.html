@@ -9,28 +9,37 @@
 <title>后台管理</title>
 <!-- Place favicon.ico in the root directory -->
 
-<!-- build:css styles/vendor.css -->
+<!-- build:css style/vendor.css -->
 <!-- endbuild -->
 
-<!-- build:css styles/main.css -->
-<link rel="stylesheet" type="text/css" href="style/main.css"/>
+<!-- build:css style/ad_main.css -->
+<link rel="stylesheet" type="text/css" href="style/admin.css"/>
 <link rel="stylesheet" type="text/css" href="style/fonts.css"/>
 <!-- endbuild -->
 
-<!-- build:js scripts/vendor/modernizr.js -->
+<!-- build:js script/vendor/modernizr.js -->
 <!-- endbuild -->
 
-<!-- build:js scripts/vendor.js -->
-	<script type="text/javascript" src="script/avalon.modern.js" defer></script>
+<!-- build:js script/ad_vendor.js -->
+	<script type="text/javascript" src="lib/avalon.modern.js" defer></script>
 <!-- endbuild -->
 
-<!-- build:js scripts/main.js -->
-<script type="text/javascript" src="script/index.js" defer></script>
+<!-- build:js script/ad_main.js -->
+<script type="text/javascript" src="script/config.js" defer></script>
+<script type="text/javascript" src="script/admin.js" defer></script>
 <!-- endbuild -->
 </head>
-<body ms-controller="mho" ms-class="onPopup:popup!=''">
+<body ms-controller="hardware">
 <!--[if lt IE 10]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
+<section class="login">
+	<header>登陆</header>
+	<section>
+		<label for="userName">用户名</label><input type="text" ms-model="userName" id="userNamer">
+		<label for="pw">密码</label><input type="password" ms-model="pw" id="pw">
+		<button class="btn">登陆</button>
+	</section>
+</section>
 </body>
 </html>

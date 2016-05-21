@@ -1,17 +1,17 @@
-@main-color: #2e8ece;
+@main-color: #7BA23F;
 @bg-color: #ecf0f1;
 @shadow-color: rgba(0,0,31,0.5);
 @i-color: #16a085;
 
 body{
-	margin: 0 0 10px 0;
+	margin: 0 0 30px 0;
+	background-color: @bg-color;
+}
+
+*{
 	font-size: 16px;
 	box-sizing: border-box;
-	background-color: @bg-color;
 	font-family: "Microsoft YaHei","微软雅黑",sans-serif;
-	&.onPopup{
-		overflow: hidden;
-	}
 }
 
 i{
@@ -23,6 +23,15 @@ a{
 }
 
 footer{
-	margin-top: 5px;
 	text-align: center;
+}
+
+.btn{
+	border: none;
+	text-align: center;
+	background-color: @main-color;
+	color: white;
+	line-height: 30px;
+	padding: 0px;
+	border-radius: 3px;
 }

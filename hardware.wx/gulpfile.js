@@ -25,7 +25,7 @@ gulp.task('pub', ['build'], function () {
 });
 
 gulp.task('dev', ['build-less'], function () {
-	browserSync.init({//已去除['src/**/*.html'], 
+	browserSync.init(['src/index.html','src/admin.html'],{//已去除['src/**/*.html'], 
 		port: 8503,
 		notify: false,//右上角的小提示
     	server: {
@@ -39,7 +39,7 @@ gulp.task('dev', ['build-less'], function () {
 
 //清空dist目录
 gulp.task('clean', function() {
-	return gulp.src(['WebContent/**/*.html','WebContent/{scripts,lib,styles,img}','WebContent/WEB-INF/classes/{script,lib,style,img}'], {read: false})
+	return gulp.src(['WebContent/**/*.html','WebContent/{,WEB-INF/classes/}{script,lib,style,img}'], {read: false})
 		.pipe(clean());
 });
 

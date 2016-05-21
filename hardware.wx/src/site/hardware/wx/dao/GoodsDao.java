@@ -19,8 +19,8 @@ public class GoodsDao {
 
 	public int insert(Goods g){
 		String sql = "insert into tbl_goods(name,lastBy,category1,category2,price,dummyPrice,param,note) values(?,?,?,?,?,?,?,?)";
-		Object[] params = new Object[] {g.getName(), g.getLastBy(), g.getCategory1(), g.getCategory2(), g.getPrice(), g.getDummyPrice(), g.getParam(), g.getNote()};
-		return jdbcTemplate.update(sql, params);
+		Object[] param = new Object[] {g.getName(), g.getLastBy(), g.getCategory1(), g.getCategory2(), g.getPrice(), g.getDummyPrice(), g.getParam(), g.getNote()};
+		return jdbcTemplate.update(sql, param);
 	}
 
 	public Goods select(int id){
@@ -35,19 +35,19 @@ public class GoodsDao {
 
 	public int update(Goods g){
 		String sql = "update tbl_goods set name=?,lastBy=?,lastTime=getdate(),category1=?,category2=?,price=?,dummyPrice=?,param=?,note=? where id=?";
-		Object[] params = new Object[] {g.getName(), g.getLastBy(), g.getCategory1(), g.getCategory2(), g.getPrice(), g.getDummyPrice(), g.getParam(), g.getNote(), g.getId()};
-		return jdbcTemplate.update(sql, params);
+		Object[] param = new Object[] {g.getName(), g.getLastBy(), g.getCategory1(), g.getCategory2(), g.getPrice(), g.getDummyPrice(), g.getParam(), g.getNote(), g.getId()};
+		return jdbcTemplate.update(sql, param);
 	}
 
 	public int status(int id){
 		String sql = "update tbl_goods set status=1-status where id=?";
-		Object[] params = new Object[] {id};
-		return jdbcTemplate.update(sql, params);
+		Object[] param = new Object[] {id};
+		return jdbcTemplate.update(sql, param);
 	}
 
 	public int sales(int id, int sales){
 		String sql = "update tbl_goods set sales=sales+? where id=?";
-		Object[] params = new Object[] {sales, id};
-		return jdbcTemplate.update(sql, params);
+		Object[] param = new Object[] {sales, id};
+		return jdbcTemplate.update(sql, param);
 	}
 }

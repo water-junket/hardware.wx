@@ -9,28 +9,35 @@
 <title>硬件</title>
 <!-- Place favicon.ico in the root directory -->
 
-<!-- build:css styles/vendor.css -->
+<!-- build:css style/vendor.css -->
 <!-- endbuild -->
 
-<!-- build:css styles/main.css -->
-<link rel="stylesheet" type="text/css" href="style/main.css"/>
+<!-- build:css style/main.css -->
+<link rel="stylesheet" type="text/css" href="style/index.css"/>
 <link rel="stylesheet" type="text/css" href="style/fonts.css"/>
 <!-- endbuild -->
 
-<!-- build:js scripts/vendor/modernizr.js -->
+<!-- build:js script/vendor/modernizr.js -->
 <!-- endbuild -->
 
-<!-- build:js scripts/vendor.js -->
-<script type="text/javascript" src="script/avalon.modern.js" defer></script>
+<!-- build:js script/vendor.js -->
+<script type="text/javascript" src="lib/avalon.mobile.js" defer></script>
 <!-- endbuild -->
 
-<!-- build:js scripts/main.js -->
+<!-- build:js script/main.js -->
+<script type="text/javascript" src="script/config.js" defer></script>
 <script type="text/javascript" src="script/index.js" defer></script>
 <!-- endbuild -->
 </head>
-<body ms-controller="mho" ms-class="onPopup:popup!=''">
+<body ms-controller="hardware">
 <!--[if lt IE 10]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
+<input type="text" ms-focus="input" ms-blur="input">
+<footer class="footer" ms-if="showFooter">
+	<a>我的订单</a>
+	<a>会员中心</a>
+	<a href="tel:18948754193">联系我们</a>
+</footer>
 </body>
 </html>

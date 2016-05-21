@@ -3,7 +3,7 @@ package site.hardware.wx.bean;
 import java.util.Date;
 
 public class Order {
-	private int id;
+	private String id;//yyyymmdd+4位数字
 	private int uid;
 	private String receive;//收货信息
 	private String detail;//商品详情
@@ -18,13 +18,13 @@ public class Order {
 	/**
 	 * @return the id
 	 */
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	/**

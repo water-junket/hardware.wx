@@ -5,6 +5,7 @@ public class Receiver {
 	private String name;
 	private String address;
 	private String tel;
+	private int uid;
 	/**
 	 * @return the tel
 	 */
@@ -17,7 +18,6 @@ public class Receiver {
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
-	private int uid;
 	/**
 	 * @return the id
 	 */

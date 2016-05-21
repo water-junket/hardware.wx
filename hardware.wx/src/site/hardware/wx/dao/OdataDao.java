@@ -4,12 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import site.hardware.wx.bean.Goods;
 import site.hardware.wx.bean.Odata;
 
 @Repository
@@ -23,12 +21,24 @@ public class OdataDao {
 
 	public int insert(Odata o){
 		String sql = "insert into tbl_odata(name,parent,category,value) values(?,?,?,?)";
-		Object[] params = new Object[] {o.getName(), o.getParent(), o.getCategory(), o.getValue()};
+		Object[] param = new Object[] {o.getName(), o.getParent(), o.getCategory(), o.getValue()};
 		try{
-			return jdbcTemplate.update(sql, params);
+			return jdbcTemplate.update(sql, param);
 		}catch(DataAccessException e){
 			return 0;
 		}
+	}
+
+	public List<Odata> select(int id, boolean status){
+		String sql = "select id,name,parent,category,value from tbl_odata where parent=? and status=?";
+		Object[] param = new Object[] {id, status?1:0};
+		return jdbcTemplate.query(sql, param, new BeanPropertyRowMapper<Odata>(Odata.class));
+	}
+
+	public List<Odata> select(String category, boolean status){
+		String sql = "select id,name,parent,category,value from tbl_odata where category=? and parent=-1 and status=?";
+		Object[] param = new Object[] {category, status?1:0};
+		return jdbcTemplate.query(sql, param, new BeanPropertyRowMapper<Odata>(Odata.class));
 	}
 
 	public List<Odata> select(int id){
@@ -45,7 +55,13 @@ public class OdataDao {
 
 	public int update(Odata o){
 		String sql = "update tbl_odata set name=? where id=?";
-		Object[] params = new Object[] {o.getName(), o.getId()};
-		return jdbcTemplate.update(sql, params);
+		Object[] param = new Object[] {o.getName(), o.getId()};
+		return jdbcTemplate.update(sql, param);
+	}
+
+	public int status(int id){
+		String sql = "update tbl_odata set status=1-status where id=?";
+		Object[] param = new Object[] {id};
+		return jdbcTemplate.update(sql, param);
 	}
 }
