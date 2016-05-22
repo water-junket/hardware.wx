@@ -17,6 +17,7 @@ var vm = avalon.define({
 	category2New: "",
 	category1Cur: {},
 	category2Cur: {},
+	goodsList: [],
 	login: function(){
 		vm.load(apiDomain+"admin/login.json",{"m.name": vm.userName, "m.pw": vm.pw},function(r){
 			if(r!="fail"){
@@ -48,8 +49,18 @@ var vm = avalon.define({
 		});
 	},
 	cat: function(el){
-		if(el.parent==-1) vm.category1Cur=el;
-		else vm.category1Cur=el;
+		if(el.parent==-1){
+			vm.category1Cur=el;
+			vm.loadCategory(el.id);
+		}else{
+			vm.category2Cur=el;
+			vm.loadGoods(el.id);
+		}
+	},
+	loadGoods: function(c2){
+		vm.load(apiDomain+"admin/goods.json",{"m.id": vm.userId, "m.token": vm.token, category: c2},function(list){
+			vm.goodsList=list;
+		});
 	},
 	load: function(url,data,fun,type){}
 });

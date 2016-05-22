@@ -40,13 +40,15 @@
 }
 
 .category{
-	padding: 10px 0 0 10px;
+	padding-left: 10px;
 	width: 200px;
 	overflow-y: hidden;
 	overflow-x: auto;
 	float: left;
 	header{
 		padding: 10px;
+		display: inline-block;
+		width: 150px;
 	}
 	input{
 		width: 150px;
@@ -58,5 +60,22 @@
 		display: block;
 		color: darken(@main-color,10%);
 		padding-bottom: 5px;
+	}
+}
+
+.goods{
+	header{
+		padding: 10px;
+		display: inline-block;
+		width: 150px;
+	}
+	th{
+		background-color: @i-color;
+		color: white;
+	}
+	a{
+		display: inline-block;
+		width: 100px;
+		margin: 5px;
 	}
 }

@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import site.hardware.wx.bean.Goods;
 import site.hardware.wx.bean.Manager;
 import site.hardware.wx.bean.Odata;
+import site.hardware.wx.service.GoodsService;
 import site.hardware.wx.service.ManagerService;
 import site.hardware.wx.service.OdataService;
 
@@ -25,6 +27,9 @@ public class AdminController {
 
 	@Autowired
 	private OdataService odataService;
+
+	@Autowired
+	private GoodsService goodsService;
 
 	@InitBinder("m")  
 	public void initBinder1(WebDataBinder binder) {  
@@ -51,4 +56,10 @@ public class AdminController {
 		else return false;
 	}
 
+	@RequestMapping(value="/goods", method = RequestMethod.POST)
+	@ResponseBody
+	public List<Goods> goods(@ModelAttribute("m") Manager m, @RequestParam("category") int category, @RequestParam(value = "page", required = false, defaultValue = "1") int page, @RequestParam(value = "step", required = false, defaultValue = "15") int step){
+		if (managerService.permission(m, 0)) return goodsService.select(category, page, step);
+		else return null;
+	}
 }

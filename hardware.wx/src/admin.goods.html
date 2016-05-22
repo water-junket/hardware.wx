@@ -4,9 +4,18 @@
 	<input type="text" ms-duplex="category1New" placeholder="新增"><i class="icon-plus" ms-click="addCategory(category1New,-1)"></i>
 </section>
 <section class="category" ms-if="category1Cur.id">
-	<header>{{category1Cur.name}}</header>
-	<a></a>
-	<input type="text" ms-duplex="category2New" placeholder="新增"><i class="icon-plus" ms-click="addCategory(category2New,category1Cur)"></i>
+	<header>{{category1Cur.name}}</header><i class="icon-plus"></i>
+	<a ms-repeat="category2" ms-class="btn:category2Cur==el.id" ms-click="cat(el)">{{el.name}}</a>
+	<input type="text" ms-duplex="category2New" placeholder="新增"><i class="icon-plus" ms-click="addCategory(category2New,category1Cur.id)"></i>
 </section>
 <section class="goods" ms-if="category2Cur.id">
+	<header>{{category2Cur.name}}</header><i class="icon-plus"></i>
+	<table>
+		<tr>
+			<th>编号</th><th>名称</th><th>规格</th><th>价格</th><th>操作</th>
+		</tr>
+		<tr ms-repeat="goodsList">
+		</tr>
+	</table>
+	<a class="btn">新增</a>
 </section>
