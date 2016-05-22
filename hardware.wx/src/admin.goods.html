@@ -1,6 +1,6 @@
 <section class="category">
 	<header>大类</header>
-	<a></a>
+	<a ms-repeat="category1" ms-class="btn:category1Cur==el.id" ms-click="cat(el.id,el.parent)">{{el.name}}</a>
 	<input type="text" ms-duplex="category1New" placeholder="新增"><i class="icon-plus" ms-click="addCategory(category1New,-1)"></i>
 </section>
 <section class="category" ms-if="category1Cur!=-1">
