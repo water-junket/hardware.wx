@@ -14,4 +14,4 @@ avalon.config({//似乎这里开头用avalon还是用require效果一样
 //	,debug: false
 });
 
-apiDomain="http://192.168.0.102:8080/";
+apiDomain="http://localhost:8080/";
