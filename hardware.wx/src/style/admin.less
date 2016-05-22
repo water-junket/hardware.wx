@@ -1,6 +1,6 @@
 @import "main";
 
-section.login{
+.login{
 	width: 300px;
 	margin: 200px auto 0 auto;
 	padding: 3px;
@@ -24,5 +24,38 @@ section.login{
 		button{
 			width: 100px;
 		}
+	}
+}
+
+.nav{
+	line-height: 40px;
+	background-color: @shadow-color;
+	padding-left: 20px;
+	a{
+		display: inline-block;
+		width: 100px;
+		color: white;
+		text-align: center;
+	}
+}
+
+.category{
+	padding: 10px 0 0 10px;
+	width: 200px;
+	overflow-y: hidden;
+	overflow-x: auto;
+	header{
+		padding: 10px;
+	}
+	input{
+		width: 150px;
+	}
+	i{
+		padding: 10px;
+	}
+	a{
+		display: block;
+		color: darken(@main-color,10%);
+		padding-bottom: 5px;
 	}
 }
