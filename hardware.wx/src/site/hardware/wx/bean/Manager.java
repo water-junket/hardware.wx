@@ -72,7 +72,7 @@ public class Manager {
 	public Manager md5(){
 		try{
 			MessageDigest md = MessageDigest.getInstance("MD5");
-			byte[] b = md.digest(pw.getBytes());
+			byte[] b = md.digest((name+"siren"+pw).getBytes());
 			StringBuilder sb = new StringBuilder();
 			for (int i = 0; i < b.length; i++) {
 				if ((b[i] & 0xff) < 0x10) {

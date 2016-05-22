@@ -42,13 +42,13 @@ public class OdataDao {
 	}
 
 	public List<Odata> select(int id){
-		String sql = "select id,name,parent,category,value from tbl_odata where parent=?";
+		String sql = "select id,name,parent,category,value,status from tbl_odata where parent=?";
 		Object[] param = new Object[] {id};
 		return jdbcTemplate.query(sql, param, new BeanPropertyRowMapper<Odata>(Odata.class));
 	}
 
 	public List<Odata> select(String category){
-		String sql = "select id,name,parent,category,value from tbl_odata where category=? and parent=-1";
+		String sql = "select id,name,parent,category,value,status from tbl_odata where category=? and parent=-1";
 		Object[] param = new Object[] {category};
 		return jdbcTemplate.query(sql, param, new BeanPropertyRowMapper<Odata>(Odata.class));
 	}
