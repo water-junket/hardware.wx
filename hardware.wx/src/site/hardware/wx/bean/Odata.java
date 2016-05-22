@@ -7,6 +7,7 @@ public class Odata {
 	private int parent;
 	private String category;
 	private boolean status;
+	private boolean edit;
 	/**
 	 * @return the id
 	 */
@@ -78,5 +79,17 @@ public class Odata {
 	 */
 	public void setStatus(boolean status) {
 		this.status = status;
+	}
+	/**
+	 * @return the edit
+	 */
+	public boolean isEdit() {
+		return edit;
+	}
+	/**
+	 * @param edit the edit to set
+	 */
+	public void setEdit(boolean edit) {
+		this.edit = edit;
 	}
 }

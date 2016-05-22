@@ -36,6 +36,11 @@ public class AdminController {
 		binder.setFieldDefaultPrefix("m.");  
 	}
 
+	@InitBinder("o")  
+	public void initBinder2(WebDataBinder binder) {  
+		binder.setFieldDefaultPrefix("o.");  
+	}
+
 	@RequestMapping(value="/login", method = RequestMethod.POST)
 	@ResponseBody
 	public String login(@ModelAttribute("m") Manager m){
@@ -53,6 +58,20 @@ public class AdminController {
 	@ResponseBody
 	public boolean addCategory(@ModelAttribute("m") Manager m, @RequestParam(value = "parent", required = false, defaultValue = "-1") int parent, @RequestParam("title") String title){
 		if (managerService.permission(m, 0)) return odataService.addCategory(title, parent);
+		else return false;
+	}
+
+	@RequestMapping(value="/saveCategory", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean saveCategory(@ModelAttribute("m") Manager m, @ModelAttribute("o") Odata o){
+		if (managerService.permission(m, 0)) return odataService.saveCategory(o);
+		else return false;
+	}
+
+	@RequestMapping(value="/statusCategory", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean statusCategory(@ModelAttribute("m") Manager m, @ModelAttribute("o") Odata o){
+		if (managerService.permission(m, 0)) return odataService.statusCategory(o);
 		else return false;
 	}
 

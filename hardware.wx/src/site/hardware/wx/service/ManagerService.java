@@ -35,7 +35,7 @@ public class ManagerService {
 			Manager t = manager.get(m.getId());
 			if (t.getToken().equals(m.getToken())) p = t.getPermission();//如token正确
 			else return false;//如token错误
-		}else{//未未缓存
+		}else{//如未缓存
 			p = managerDao.permission(m);
 			if (p == -1) return false;//如校验失败
 			m.setPermission(p);

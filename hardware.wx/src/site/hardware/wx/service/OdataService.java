@@ -31,8 +31,20 @@ public class OdataService {
 		n.setCategory("category");
 		n.setName(t);
 		n.setParent(p);
-		boolean flag = odataDao.insert(n) != 0;
+		boolean flag = odataDao.insert(n) == 1;
 		if (flag) category.remove(p);
+		return flag;
+	}
+
+	public boolean saveCategory(Odata o){
+		boolean flag = odataDao.update(o) == 1;
+		if (flag) category.remove(o.getParent());
+		return flag;
+	}
+
+	public boolean statusCategory(Odata o){
+		boolean flag = odataDao.status(o.getId()) == 1;
+		if (flag) category.remove(o.getParent());
 		return flag;
 	}
 }
