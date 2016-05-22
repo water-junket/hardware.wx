@@ -33,13 +33,20 @@
 <!--[if lt IE 10]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
-<section class="login">
+<section class="login" ms-if="token==''">
 	<header>登陆</header>
 	<section>
-		<label for="userName">用户名</label><input type="text" ms-model="userName" id="userNamer">
-		<label for="pw">密码</label><input type="password" ms-model="pw" id="pw">
-		<button class="btn">登陆</button>
+		<label for="userName">用户名</label><input type="text" ms-duplex="userName" id="userNamer">
+		<label for="pw">密码</label><input type="password" ms-duplex="pw" id="pw">
+		<button class="btn" ms-click="login">登陆</button>
 	</section>
+</section>
+<header class="nav" ms-if="token!=''">
+	<a ms-class="btn:tab=='goods'" ms-click="toggle('goods')">商品管理</a>
+	<a ms-class="btn:tab=='order'" ms-click="toggle('order')">订单管理</a>
+	<a ms-class="btn:tab=='manager'" ms-click="toggle('manager')">后台管理</a>
+</header>
+<section class="main" ms-if="token!=''&&tab!=''" ms-include-src="admin.{{tab}}.html">
 </section>
 </body>
 </html>
