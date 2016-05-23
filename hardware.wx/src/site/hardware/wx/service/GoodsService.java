@@ -16,4 +16,14 @@ public class GoodsService {
 	public List<Goods> select(int c2, int page, int step){
 		return goodsDao.select(c2, page * step - step + 1, page * step);
 	}
+
+	public boolean insert(Goods g, int mid){
+		g.setLastBy(mid);
+		return goodsDao.insert(g) == 1;
+	}
+
+	public int countPages(int c2, int step){
+		int count = goodsDao.count(c2);
+		return count / step + (count % step > 0 ? 1 : 0);
+	}
 }
