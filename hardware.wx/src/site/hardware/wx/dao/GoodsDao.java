@@ -42,6 +42,12 @@ public class GoodsDao {
 		return jdbcTemplate.query(sql, param, new BeanPropertyRowMapper<Goods>(Goods.class));
 	}
 
+	public int count(int c2){
+		String sql = "select count(1) from tbl_goods where category2=?";
+		Object[] param = new Object[] {c2};
+		return jdbcTemplate.queryForObject(sql, param, Integer.class);
+	}
+
 	public int update(Goods g){
 		String sql = "update tbl_goods set name=?,lastBy=?,lastTime=getdate(),category1=?,category2=?,price=?,dummyPrice=?,param=?,note=? where id=?";
 		Object[] param = new Object[] {g.getName(), g.getLastBy(), g.getCategory1(), g.getCategory2(), g.getPrice(), g.getDummyPrice(), g.getParam(), g.getNote(), g.getId()};

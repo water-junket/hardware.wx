@@ -1,6 +1,8 @@
 package site.hardware.wx.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,6 +43,11 @@ public class AdminController {
 		binder.setFieldDefaultPrefix("o.");  
 	}
 
+	@InitBinder("g")  
+	public void initBinder3(WebDataBinder binder) {  
+		binder.setFieldDefaultPrefix("g.");  
+	}
+
 	@RequestMapping(value="/login", method = RequestMethod.POST)
 	@ResponseBody
 	public String login(@ModelAttribute("m") Manager m){
@@ -77,8 +84,20 @@ public class AdminController {
 
 	@RequestMapping(value="/goods", method = RequestMethod.POST)
 	@ResponseBody
-	public List<Goods> goods(@ModelAttribute("m") Manager m, @RequestParam("category") int category, @RequestParam(value = "page", required = false, defaultValue = "1") int page, @RequestParam(value = "step", required = false, defaultValue = "15") int step){
-		if (managerService.permission(m, 0)) return goodsService.select(category, page, step);
+	public Map<String, Object> goods(@ModelAttribute("m") Manager m, @RequestParam("category") int category, @RequestParam(value = "page", required = false, defaultValue = "1") int page, @RequestParam(value = "step", required = false, defaultValue = "15") int step){
+		if (managerService.permission(m, 0)){
+			HashMap<String, Object> hm = new HashMap<String, Object>();
+			hm.put("list", goodsService.select(category, page, step));
+			hm.put("pages", goodsService.countPages(category, step));
+			return hm;
+		}
 		else return null;
+	}
+
+	@RequestMapping(value="/addGoods", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean addGoods(@ModelAttribute("m") Manager m, @ModelAttribute("g") Goods g){
+		if (managerService.permission(m, 0)) return goodsService.insert(g, m.getId());
+		else return false;
 	}
 }
