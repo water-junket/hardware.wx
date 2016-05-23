@@ -47,27 +47,36 @@
 	float: left;
 	header{
 		padding: 10px;
-		display: inline-block;
-		width: 150px;
 	}
 	input{
-		width: 150px;
+		width: 140px;
+		margin-right: 10px;
+		&[placeholder]{
+			margin-top: 5px;
+		}
 	}
 	i{
-		padding: 10px;
+		padding: 6px 2px;
+		&.icon-plus{
+			padding: 6px 12px;
+		}
+	}
+	section{
+		line-height: 30px;
 	}
 	a{
-		display: block;
+		display: inline-block;
+		width: 140px;
 		color: darken(@main-color,10%);
-		padding-bottom: 5px;
+		margin-right: 10px;
 	}
 }
 
 .goods{
+	margin-left: 10px;
+	float: left;
 	header{
 		padding: 10px;
-		display: inline-block;
-		width: 150px;
 	}
 	th{
 		background-color: @i-color;
@@ -77,5 +86,12 @@
 		display: inline-block;
 		width: 100px;
 		margin: 5px;
+	}
+	label{
+		width: 100px;
+		line-height: 30px;
+		display: inline-block;
+		padding-right: 10px;
+		text-align: right;
 	}
 }

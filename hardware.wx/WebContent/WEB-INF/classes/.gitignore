@@ -1,12 +1,5 @@
-/admin.html
-/index.html
-/lib
-/script
 /site
+/script
+/admin.goods.list.html
+/admin.goods.add.html
 /style
-/admin.goods.html
-/admin.order.html
-/admin.manager.html
-/font
-/fonts
-/lib
