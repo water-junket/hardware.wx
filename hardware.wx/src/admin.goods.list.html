@@ -1,9 +1,16 @@
 <header>{{category2Cur.name}}</header>
 <table>
 	<tr>
-		<th>编号</th><th>名称</th><th>规格</th><th>价格</th><th>操作</th>
+		<th>编号</th><th>名称</th><th>规格</th><th>价格</th><th>销量</th><th>操作</th>
 	</tr>
 	<tr ms-repeat="goodsList">
+		<td>{{el.id}}</td>
+		<td>{{el.name}}</td>
+		<td>{{el.param}}</td>
+		<td>{{el.price}}/{{el.dummyPrice}}</td>
+		<td>{{el.sales}}</td>
+		<td><i class="icon-pencil" ms-click="goodsToggle('edit',el)"></i><i ms-class="icon-eye{{el.status?'-blocked':''}}"></i></td>
 	</tr>
 </table>
+<section class="pages"><i class="icon-arrow-left" ms-click="pageGoods(goodsPageCur-1)" ms-if="goodsPageCur>1"></i>{{goodsPageCur}}/{{goodsPages}}<i class="icon-arrow-right" ms-click="pageGoods(goodsPageCur+1)" ms-if="goodsPageCur<goodsPages"></i></section>
 <a class="btn" ms-click="goodsToggle('add')">新增商品</a>

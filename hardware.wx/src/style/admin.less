@@ -75,12 +75,27 @@
 .goods{
 	margin-left: 10px;
 	float: left;
+	width: calc(100vw - 420px);
+	table{
+		width: 100%;
+		text-align: right;
+		th{
+			color: white;
+			background-color: @i-color;
+			text-align: center;
+		}
+		tr:nth-child(even){
+			background-color: lighten(@main-color,40%);
+		}
+		tr:nth-child(odd){
+			background-color: lighten(@main-color,20%);
+		}
+		td:last-child,td:first-child{
+			text-align: center;
+		}
+	}
 	header{
 		padding: 10px;
-	}
-	th{
-		background-color: @i-color;
-		color: white;
 	}
 	a{
 		display: inline-block;
@@ -92,6 +107,17 @@
 		line-height: 30px;
 		display: inline-block;
 		padding-right: 10px;
+		text-align: right;
+		vertical-align: top;
+	}
+	input{
+		width: 200px;
+	}
+	textarea{
+		width: 200px;
+		height: 100px;
+	}
+	.pages{
 		text-align: right;
 	}
 }
