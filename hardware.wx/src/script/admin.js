@@ -2,8 +2,6 @@
  * New node file
  */
 
-var goods={id: 0,name: '',category1: 0,category2: 0,price: 0,dummyPrice: 0,param: '',note: ''};
-
 var vm = avalon.define({
 	$id: "hardware",
 	userName: "",
@@ -23,6 +21,8 @@ var vm = avalon.define({
 	category2New: "",
 	category1Cur: {},
 	category2Cur: {},
+	titleImg: 0,
+	normalImg: [],
 	goodsList: [],
 	goods: avalon.mix({},goods),
 	login: function(){//登陆
@@ -50,7 +50,7 @@ var vm = avalon.define({
 		},'text');
 	},
 	loadCategory: function(p,t){//读取类别
-		vm.load(apiDomain+"admin/category.json",{"m.id": vm.userId, "m.token": vm.token, parent: p},function(list){
+		vm.load(apiDomain+"goods/category.json",{parent: p},function(list){
 			if(p==-1) vm.category1=list;
 			else if(!t) vm.category2=list;
 			else vm.category2Temp=list;
@@ -79,7 +79,7 @@ var vm = avalon.define({
 		}
 	},
 	loadGoods: function(c2, i){//读取商品列表
-		vm.load(apiDomain+"admin/goods.json",{"m.id": vm.userId, "m.token": vm.token, category: c2, page: i},function(data){
+		vm.load(apiDomain+"goods/list.json",{"m.id": vm.userId, "m.token": vm.token, category: c2, page: i},function(data){
 			vm.goodsList=data.list;
 			vm.goodsPages=data.pages;
 			vm.goodsPageCur=i;
@@ -95,6 +95,12 @@ var vm = avalon.define({
 		}else if(tab=='edit'){
 			vm.goods=avalon.mix({},goods,el);
 			vm.loadCategory(vm.goods.category1,true);
+		}else if(tab=='img'){
+			vm.goods=avalon.mix({},goods,el);
+			vm.load(apiDomain+"img/list.json",{"m.id": vm.userId, "m.token": vm.token, "gid": vm.goods.id},function(data){
+				if(data.title) vm.titleImg=data.title.id;
+				vm.normalImg=data.normal;
+			});
 		}
 	},
 	goodsCategory: function(a){//商品选择大类
