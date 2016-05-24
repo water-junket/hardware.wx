@@ -1,5 +1,6 @@
 package site.hardware.wx.bean;
 
+import java.io.File;
 import java.util.Date;
 
 public class Img {
@@ -80,5 +81,10 @@ public class Img {
 	 */
 	public void setLastDate(Date lastDate) {
 		this.lastDate = lastDate;
+	}
+
+	public String getActualName(){
+		String[] l = getOname().split(File.separator);
+		return id + File.separator + l[l.length-1];
 	}
 }
