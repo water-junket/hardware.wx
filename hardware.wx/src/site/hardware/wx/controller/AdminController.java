@@ -100,4 +100,18 @@ public class AdminController {
 		if (managerService.permission(m, 0)) return goodsService.insert(g, m.getId());
 		else return false;
 	}
+
+	@RequestMapping(value="/statusGoods", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean statusGoods(@ModelAttribute("m") Manager m, @ModelAttribute("g") Goods g){
+		if (managerService.permission(m, 0)) return goodsService.status(g, m.getId());
+		else return false;
+	}
+
+	@RequestMapping(value="/editGoods", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean editGoods(@ModelAttribute("m") Manager m, @ModelAttribute("g") Goods g){
+		if (managerService.permission(m, 0)) return goodsService.edit(g, m.getId());
+		else return false;
+	}
 }

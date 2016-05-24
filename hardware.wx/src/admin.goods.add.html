@@ -1,8 +1,8 @@
 <header>新增商品</header>
 <section><label for="name">名称</label><input id="name" type="text" ms-duplex="goods.name"></section>
-<section><label for="param">规格</label><input id="param" type="number" ms-duplex="goods.param"></section>
+<section><label for="param">规格</label><input id="param" type="text" ms-duplex="goods.param"></section>
 <section><label for="price">微信价</label><input id="price" type="number" ms-duplex="goods.price"></section>
-<section><label for="dummyPrice">市场价</label><input id="dummyPrice" type="text" ms-duplex="goods.dummyPrice"></section>
+<section><label for="dummyPrice">市场价</label><input id="dummyPrice" type="number" ms-duplex="goods.dummyPrice"></section>
 <section><label for="category1">大类</label><select id="category1" ms-duplex="goods.category1" data-duplex-changed="goodsCategory">
 	<option ms-repeat="category1" ms-attr-value="el.id">{{el.name}}</option>
 </select></section>

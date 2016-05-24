@@ -12,7 +12,7 @@ import site.hardware.wx.bean.Goods;
 
 @Repository
 public class GoodsDao {
-	private static final String FIELDS = "id,name,category1,category2,price,dummyPrice,param,note,sales";
+	private static final String FIELDS = "id,name,category1,category2,price,dummyPrice,param,note,sales,status";
 
 	/**
 	 * 自动装配的数据库链接模板
@@ -54,7 +54,7 @@ public class GoodsDao {
 		return jdbcTemplate.update(sql, param);
 	}
 
-	public int status(int id){
+	public int status(int id, int mid){
 		String sql = "update tbl_goods set status=1-status where id=?";
 		Object[] param = new Object[] {id};
 		return jdbcTemplate.update(sql, param);

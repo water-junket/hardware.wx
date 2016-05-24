@@ -101,19 +101,23 @@ var vm = avalon.define({
 		vm.loadCategory(vm.goods.category1,true);
 	},
 	saveGoods: function(){//保存商品：添加或修改
-		if(vm.goods.id==0){
-			vm.load(apiDomain+"admin/addGoods.json",{"m.id": vm.userId, "m.token": vm.token, "g.name": vm.goods.name, "g.price": vm.goods.price, "g.dummyPrice": vm.goods.dummyPrice, "g.category1": vm.goods.category1, "g.category2": vm.goods.category2, "g.param": vm.goods.param, "g.note": vm.goods.note},function(flag){
-				if(eval(flag)){
-					alert("提交成功");
-					vm.goodsToggle('list');
-				}
-			},'text');
-		}else{
-			
-		}
+		var url=vm.goods.id==0?apiDomain+"admin/addGoods.json":apiDomain+"admin/editGoods.json";
+		var param={"m.id": vm.userId, "m.token": vm.token, "g.name": vm.goods.name, "g.price": vm.goods.price, "g.dummyPrice": vm.goods.dummyPrice, "g.category1": vm.goods.category1, "g.category2": vm.goods.category2, "g.param": vm.goods.param, "g.note": vm.goods.note};
+		if(vm.goods.id!=0) avalon.mix(param,{"g.id": vm.goods.id});
+		vm.load(url,param,function(flag){
+			if(eval(flag)){
+				alert("提交成功");
+				vm.goodsToggle('list');
+			}
+		},'text');
 	},
-	pageGoods: function(i){
+	pageGoods: function(i){//商品列表翻页
 		vm.loadGoods(vm.category2Cur.id, i);
+	},
+	statusGoods: function(c){//修改商品状态
+		vm.load(apiDomain+"admin/statusGoods.json",{"m.id": vm.userId, "m.token": vm.token, "g.id": c.id},function(flag){
+			if(eval(flag)) c.status=!c.status;
+		},'text');
 	},
 	load: function(url,data,fun,type){}
 });

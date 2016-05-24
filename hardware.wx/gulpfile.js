@@ -34,7 +34,7 @@ gulp.task('dev', ['build-less'], function () {
 	});
 	
 	gulp.watch('src/style/*.less', ['build-less']);
-	gulp.watch(['src/*.html','src/script/*.js']).on('change', reload);
+	gulp.watch(['src/index.html','src/admin.html','src/script/*.js']).on('change', reload);
 });
 
 //清空dist目录

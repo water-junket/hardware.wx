@@ -26,4 +26,13 @@ public class GoodsService {
 		int count = goodsDao.count(c2);
 		return count / step + (count % step > 0 ? 1 : 0);
 	}
+
+	public boolean status(Goods g, int mid){
+		return goodsDao.status(g.getId(), mid) == 1;
+	}
+
+	public boolean edit(Goods g, int mid){
+		g.setLastBy(mid);
+		return goodsDao.update(g) == 1;
+	}
 }
