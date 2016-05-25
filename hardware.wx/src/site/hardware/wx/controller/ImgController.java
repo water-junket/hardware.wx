@@ -1,5 +1,6 @@
 package site.hardware.wx.controller;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -45,7 +46,7 @@ public class ImgController {
 		Img i = imgService.download(id);
 		response.setContentType(i.getCtype());
 		response.setHeader("Content-Disposition", "attachment;filename=" + i.getOname());
-		String file = ImgService.getPath() + "." + i.getActualName();
+		String file = ImgService.getPath() + File.separator + i.getActualName();
 		FileInputStream fis = null;
 		OutputStream os = null;
 		try{
@@ -84,8 +85,8 @@ public class ImgController {
 
 	@RequestMapping(value="/remove", method = RequestMethod.POST)
 	@ResponseBody
-	public boolean remove(@ModelAttribute("m") Manager m, @RequestParam("id") int id, @RequestParam("aname") String aname){
-		if (managerService.permission(m, 0)) return imgService.remove(id, aname);
+	public boolean remove(@ModelAttribute("m") Manager m, @RequestParam("iid") int iid, @RequestParam("aname") String aname){
+		if (managerService.permission(m, 0)) return imgService.remove(iid, aname);
 		else return false;
 	}
 

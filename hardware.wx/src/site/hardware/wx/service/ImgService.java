@@ -39,7 +39,7 @@ public class ImgService {
 		i.setGid(gid);
 		i.setCtype(file.getContentType());
 		i.setOname(file.getOriginalFilename());
-		i.setTitle(isTitle);
+		i.setIsTitle(isTitle);
 		i.setId(imgDao.insert(i));
 		if (i.getId()==0) return false;
 		String[] l = i.getOname().split("\\.");

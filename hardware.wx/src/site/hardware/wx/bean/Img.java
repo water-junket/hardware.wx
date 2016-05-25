@@ -66,7 +66,7 @@ public class Img {
 	/**
 	 * @param isTitle the isTitle to set
 	 */
-	public void setTitle(boolean isTitle) {
+	public void setIsTitle(boolean isTitle) {
 		this.isTitle = isTitle;
 	}
 	/**
