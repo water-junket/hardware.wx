@@ -1,9 +1,5 @@
 package site.hardware.wx.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
@@ -54,13 +50,6 @@ public class AdminController {
 		return managerService.login(m.md5());
 	}
 
-	@RequestMapping(value="/category", method = RequestMethod.POST)
-	@ResponseBody
-	public List<Odata> category(@ModelAttribute("m") Manager m, @RequestParam(value = "parent", required = false, defaultValue = "-1") int parent){
-		if (managerService.permission(m, 0)) return odataService.category(parent);
-		else return null;
-	}
-
 	@RequestMapping(value="/addCategory", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean addCategory(@ModelAttribute("m") Manager m, @RequestParam(value = "parent", required = false, defaultValue = "-1") int parent, @RequestParam("title") String title){
@@ -80,18 +69,6 @@ public class AdminController {
 	public boolean statusCategory(@ModelAttribute("m") Manager m, @ModelAttribute("o") Odata o){
 		if (managerService.permission(m, 0)) return odataService.statusCategory(o);
 		else return false;
-	}
-
-	@RequestMapping(value="/goods", method = RequestMethod.POST)
-	@ResponseBody
-	public Map<String, Object> goods(@ModelAttribute("m") Manager m, @RequestParam("category") int category, @RequestParam(value = "page", required = false, defaultValue = "1") int page, @RequestParam(value = "step", required = false, defaultValue = "15") int step){
-		if (managerService.permission(m, 0)){
-			HashMap<String, Object> hm = new HashMap<String, Object>();
-			hm.put("list", goodsService.select(category, page, step));
-			hm.put("pages", goodsService.countPages(category, step));
-			return hm;
-		}
-		else return null;
 	}
 
 	@RequestMapping(value="/addGoods", method = RequestMethod.POST)

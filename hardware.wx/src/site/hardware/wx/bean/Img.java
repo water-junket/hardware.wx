@@ -81,4 +81,9 @@ public class Img {
 	public void setLastDate(Date lastDate) {
 		this.lastDate = lastDate;
 	}
+
+	public String getActualName(){
+		String[] l = getOname().split("\\.");
+		return id + "." + l[l.length-1];
+	}
 }

@@ -36,15 +36,15 @@ public class GoodsDao {
 		}
 	}
 
-	public List<Goods> select(int c2, int begin, int end){
-		String sql = "select " + FIELDS + " from (select " + FIELDS + ",row_number() over(order by id desc) as rn from tbl_goods where category2=?) as t where rn between ? and ?";
-		Object[] param = new Object[] {c2, begin, end};
+	public List<Goods> select(int c, int begin, int end){
+		String sql = "select " + FIELDS + " from (select " + FIELDS + ",row_number() over(order by id desc) as rn from tbl_goods where category1=? or category2=?) as t where rn between ? and ?";
+		Object[] param = new Object[] {c, c, begin, end};
 		return jdbcTemplate.query(sql, param, new BeanPropertyRowMapper<Goods>(Goods.class));
 	}
 
-	public int count(int c2){
-		String sql = "select count(1) from tbl_goods where category2=?";
-		Object[] param = new Object[] {c2};
+	public int count(int c){
+		String sql = "select count(1) from tbl_goods where category1=? or category2=?";
+		Object[] param = new Object[] {c, c};
 		return jdbcTemplate.queryForObject(sql, param, Integer.class);
 	}
 

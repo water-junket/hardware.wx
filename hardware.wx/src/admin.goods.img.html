@@ -1,5 +1,25 @@
 <header>标题图片</header>
-<img ms-if="titleImg!=0">
-<span ms-if="titleImg==0">无</span>
+<section class="img" ms-if="titleImg">
+	<img>
+	<i></i>
+</section>
+<form ms-if="!titleImg" enctype="multipart/form-data" method="post" name="title">
+	<input type="hidden" name="gid" ms-attr-value="goods.id">
+	<input type="hidden" name="isTitle" value="true">
+	<input type="hidden" name="m.id" ms-attr-value="userId">
+	<input type="hidden" name="m.token" ms-attr-value="token">
+	<input type="file" name="imgFile" required="required">
+	<a class="btn" ms-click="uploadImg('title')">提交</a>
+</form>
+<hr>
 <header>轮播图片</header>
+<form ms-if="!titleImg" enctype="multipart/form-data" method="post" name="normal">
+	<input type="hidden" name="gid" ms-attr-value="goods.id">
+	<input type="hidden" name="isTitle" value="false">
+	<input type="hidden" name="m.id" ms-attr-value="userId">
+	<input type="hidden" name="m.token" ms-attr-value="token">
+	<input type="file" name="imgFile" required="required">
+	<a class="btn" ms-click="uploadImg('normal')">提交</a>
+</form>
+<hr>
 <a class="btn" ms-click="goodsToggle('list')">返回</a>

@@ -97,10 +97,7 @@ var vm = avalon.define({
 			vm.loadCategory(vm.goods.category1,true);
 		}else if(tab=='img'){
 			vm.goods=avalon.mix({},goods,el);
-			vm.load(apiDomain+"img/list.json",{"m.id": vm.userId, "m.token": vm.token, "gid": vm.goods.id},function(data){
-				if(data.title) vm.titleImg=data.title.id;
-				vm.normalImg=data.normal;
-			});
+			vm.loadImg();
 		}
 	},
 	goodsCategory: function(a){//商品选择大类
@@ -125,6 +122,16 @@ var vm = avalon.define({
 			if(eval(flag)) c.status=!c.status;
 		},'text');
 	},
+	loadImg: function(){
+		vm.load(apiDomain+"img/list.json",{"m.id": vm.userId, "m.token": vm.token, "gid": vm.goods.id},function(data){
+			if(data.title) vm.titleImg=data.title.id;
+			vm.normalImg=data.normal;
+		});
+	},
+	uploadImg: function(f){},
+	removeImg: function(){
+		
+	},
 	load: function(url,data,fun,type){}
 });
 
@@ -132,4 +139,10 @@ require(["domReady!", "mmRequest"], function() {
 	vm.load=function(url,data,fun,type){
 		avalon.post(url,data,fun,type||'json');
 	};
+	vm.uploadImg=function(f){
+		var fd=new FormData(document.forms.namedItem(f));
+		avalon.upload(apiDomain+"img/upload.json",fd,function(){
+			vm.loadImg();
+		},'text');
+	}
 });

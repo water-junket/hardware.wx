@@ -13,8 +13,8 @@ public class GoodsService {
 	@Autowired
 	private GoodsDao goodsDao;
 
-	public List<Goods> select(int c2, int page, int step){
-		return goodsDao.select(c2, page * step - step + 1, page * step);
+	public List<Goods> select(int c, int page, int step){
+		return goodsDao.select(c, page * step - step + 1, page * step);
 	}
 
 	public boolean insert(Goods g, int mid){
@@ -22,8 +22,8 @@ public class GoodsService {
 		return goodsDao.insert(g) == 1;
 	}
 
-	public int countPages(int c2, int step){
-		int count = goodsDao.count(c2);
+	public int countPages(int c, int step){
+		int count = goodsDao.count(c);
 		return count / step + (count % step > 0 ? 1 : 0);
 	}
 

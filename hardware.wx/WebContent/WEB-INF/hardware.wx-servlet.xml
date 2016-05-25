@@ -67,7 +67,7 @@
 	<bean id="imgService" class="site.hardware.wx.service.ImgService">
 		<!-- 设置上传文件的目录 -->  
 		<property name="path">
-			<value>d:\hardware</value>
+			<value>c:\hardware</value>
 		</property>
 	</bean>
 
