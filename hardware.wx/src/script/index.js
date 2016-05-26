@@ -9,6 +9,7 @@ var vm = avalon.define({
 	tab: 'index',
 	category1: [],
 	category2: [],
+	categoryCur: 0,
 	goodsList: [],
 	goodsPages: 0,
 	goodsPagesCur: 0,
@@ -25,11 +26,14 @@ var vm = avalon.define({
 			vm.goodsPageCur=i;
 		});
 	},
+	imgSrc: function(i){
+		return apiDomain+"img/download.img?id="+i;
+	},
 	load: function(url,data,fun,type){}
 });
 
 function check(){
-	vm.showFooter=(document.activeElement.tagName.toLowerCase()!="input")&&(document.activeElement.tagName.toLowerCase()!="textarea")&&(window.screen.availHeight/window.screen.availWidth>=1.5);
+	vm.showFooter=(document.activeElement.tagName.toLowerCase()!="input")&&(document.activeElement.tagName.toLowerCase()!="textarea")&&(document.body.clientHeight/document.body.clientWidth>=1.5);
 }
 
 window.addEventListener('resize', check);
@@ -42,7 +46,8 @@ function toggle(){
 		vm.loadCategory(-1);
 	}else if(vm.tab=="list"){
 		vm.goodsList=[];
-		vm.loadGoods(this.query.id, 1);
+		vm.categoryCur=this.query.id;
+		vm.loadGoods(vm.categoryCur, 1);
 	}else if(vm.tab=="detail"){
 		
 	}

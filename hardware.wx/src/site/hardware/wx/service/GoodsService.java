@@ -17,6 +17,10 @@ public class GoodsService {
 		return goodsDao.select(c, page * step - step + 1, page * step);
 	}
 
+	public List<Goods> selectAvailable(int c, int page, int step){
+		return goodsDao.select(c, page * step - step + 1, page * step, 1);
+	}
+
 	public boolean insert(Goods g, int mid){
 		g.setLastBy(mid);
 		return goodsDao.insert(g) == 1;

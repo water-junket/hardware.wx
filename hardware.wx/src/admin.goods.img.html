@@ -1,23 +1,23 @@
+<header>{{goods.name}}</header>
+<hr>
 <header>标题图片</header>
-<section class="img" ms-if="titleImg">
-	<img>
-	<i></i>
+<section class="img" ms-if="titleImg.id">
+	<img ms-attr-alt="{{goods.name}}" ms-attr-src="imgSrc(titleImg.id)">
+	<i class="icon-cancel-circle" ms-click="removeImg(titleImg)"></i>
 </section>
-<form ms-if="!titleImg" enctype="multipart/form-data" method="post" name="title">
-	<input type="hidden" name="gid" ms-attr-value="goods.id">
+<form ms-if="!titleImg.id" enctype="multipart/form-data" method="post" name="title">
 	<input type="hidden" name="isTitle" value="true">
-	<input type="hidden" name="m.id" ms-attr-value="userId">
-	<input type="hidden" name="m.token" ms-attr-value="token">
 	<input type="file" name="imgFile" required="required">
 	<a class="btn" ms-click="uploadImg('title')">提交</a>
 </form>
 <hr>
 <header>轮播图片</header>
-<form ms-if="!titleImg" enctype="multipart/form-data" method="post" name="normal">
-	<input type="hidden" name="gid" ms-attr-value="goods.id">
+<section class="img" ms-repeat="normalImg">
+	<img ms-attr-alt="{{el.actualName}}" ms-attr-src="imgSrc(el.id)">
+	<i class="icon-cancel-circle" ms-click="removeImg(el)"></i>
+</section>
+<form enctype="multipart/form-data" method="post" name="normal">
 	<input type="hidden" name="isTitle" value="false">
-	<input type="hidden" name="m.id" ms-attr-value="userId">
-	<input type="hidden" name="m.token" ms-attr-value="token">
 	<input type="file" name="imgFile" required="required">
 	<a class="btn" ms-click="uploadImg('normal')">提交</a>
 </form>

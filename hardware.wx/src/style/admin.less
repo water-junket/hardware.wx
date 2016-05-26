@@ -75,7 +75,7 @@
 .goods{
 	margin-left: 10px;
 	float: left;
-	width: calc(100vw - 420px);
+	width: calc(100vw - 440px);
 	table{
 		width: 100%;
 		text-align: right;
@@ -122,13 +122,25 @@
 	}
 	.img{
 		position: relative;
+		width: 320px;
+		display: inline-block;
 		img{
-			width: 375px;
+			width: 320px;
+			height: 180px;
+			&:before{
+				position: absolute;
+				z-index: 10;
+				left: 10px;
+				top: 10px;
+			}
 		}
 		i{
 			position: absolute;
 			right: 5px;
 			top: 5px;
 		}
+	}
+	form{
+		display: block;
 	}
 }

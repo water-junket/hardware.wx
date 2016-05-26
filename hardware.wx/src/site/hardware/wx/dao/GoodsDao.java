@@ -37,9 +37,25 @@ public class GoodsDao {
 	}
 
 	public List<Goods> select(int c, int begin, int end){
-		String sql = "select " + FIELDS + " from (select " + FIELDS + ",row_number() over(order by id desc) as rn from tbl_goods where category1=? or category2=?) as t where rn between ? and ?";
-		Object[] param = new Object[] {c, c, begin, end};
-		return jdbcTemplate.query(sql, param, new BeanPropertyRowMapper<Goods>(Goods.class));
+		String sql = "select " + FIELDS + " from (select " + FIELDS + ",row_number() over(order by id desc) as rn from tbl_goods where category2=?) as t where rn between ? and ?";
+		Object[] param = new Object[] {c, begin, end};
+		try{
+			return jdbcTemplate.query(sql, param, new BeanPropertyRowMapper<Goods>(Goods.class));
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public List<Goods> select(int c, int begin, int end, int status){
+		String sql = "select " + FIELDS + ",img from (select " + FIELDS + ",img,row_number() over(order by name asc) as rn from v_goods where (category1=? or category2=?) and status=?) as t where rn between ? and ?";
+		Object[] param = new Object[] {c, c, status, begin, end};
+		try{
+			return jdbcTemplate.query(sql, param, new BeanPropertyRowMapper<Goods>(Goods.class));
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	public int count(int c){

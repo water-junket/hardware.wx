@@ -21,7 +21,7 @@ var vm = avalon.define({
 	category2New: "",
 	category1Cur: {},
 	category2Cur: {},
-	titleImg: 0,
+	titleImg: {id:0, actualName:'', oname:''},
 	normalImg: [],
 	goodsList: [],
 	goods: avalon.mix({},goods),
@@ -79,7 +79,7 @@ var vm = avalon.define({
 		}
 	},
 	loadGoods: function(c2, i){//读取商品列表
-		vm.load(apiDomain+"goods/list.json",{"m.id": vm.userId, "m.token": vm.token, category: c2, page: i},function(data){
+		vm.load(apiDomain+"admin/listGoods.json",{"m.id": vm.userId, "m.token": vm.token, category: c2, page: i},function(data){
 			vm.goodsList=data.list;
 			vm.goodsPages=data.pages;
 			vm.goodsPageCur=i;
@@ -124,13 +124,19 @@ var vm = avalon.define({
 	},
 	loadImg: function(){
 		vm.load(apiDomain+"img/list.json",{"m.id": vm.userId, "m.token": vm.token, "gid": vm.goods.id},function(data){
-			if(data.title) vm.titleImg=data.title.id;
+			if(data.title) vm.titleImg={id: data.title.id, actualName: data.title.actualName, oname: data.title.oname};
+			else vm.titleImg={id: 0, actualName: '', oname: ''};
 			vm.normalImg=data.normal;
 		});
 	},
 	uploadImg: function(f){},
-	removeImg: function(){
-		
+	removeImg: function(img){
+		vm.load(apiDomain+"img/remove.json",{"m.id": vm.userId, "m.token": vm.token, iid: img.id, aname: img.actualName},function(flag){
+			if(eval(flag)) vm.loadImg();
+		},'text');
+	},
+	imgSrc: function(i){
+		return apiDomain+"img/download.img?id="+i;
 	},
 	load: function(url,data,fun,type){}
 });
@@ -141,7 +147,7 @@ require(["domReady!", "mmRequest"], function() {
 	};
 	vm.uploadImg=function(f){
 		var fd=new FormData(document.forms.namedItem(f));
-		avalon.upload(apiDomain+"img/upload.json",fd,function(){
+		avalon.upload(apiDomain+"img/upload.json",fd,{"m.id": vm.userId, "m.token": vm.token, gid: vm.goods.id},function(){
 			vm.loadImg();
 		},'text');
 	}

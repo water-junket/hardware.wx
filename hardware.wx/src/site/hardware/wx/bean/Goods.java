@@ -15,6 +15,7 @@ public class Goods {
 	private String param;
 	private String note;
 	private int sales;
+	private Integer img;
 	/**
 	 * @return the id
 	 */
@@ -158,5 +159,17 @@ public class Goods {
 	 */
 	public void setSales(int sales) {
 		this.sales = sales;
+	}
+	/**
+	 * @return the img
+	 */
+	public Integer getImg() {
+		return img;
+	}
+	/**
+	 * @param img the img to set
+	 */
+	public void setImg(Integer img) {
+		this.img = img;
 	}
 }

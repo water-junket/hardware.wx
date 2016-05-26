@@ -32,9 +32,9 @@ public class GoodsController {
 
 	@RequestMapping(value="/list", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> goods(@RequestParam("category") int category, @RequestParam(value = "page", required = false, defaultValue = "1") int page, @RequestParam(value = "step", required = false, defaultValue = "15") int step){
+	public Map<String, Object> goods(@RequestParam("category") int category, @RequestParam(value = "page", required = false, defaultValue = "1") int page, @RequestParam(value = "step", required = false, defaultValue = "8") int step){
 		HashMap<String, Object> hm = new HashMap<String, Object>();
-		hm.put("list", goodsService.select(category, page, step));
+		hm.put("list", goodsService.selectAvailable(category, page, step));
 		hm.put("pages", goodsService.countPages(category, step));
 		return hm;
 	}
