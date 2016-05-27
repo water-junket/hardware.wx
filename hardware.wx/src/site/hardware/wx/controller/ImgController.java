@@ -92,17 +92,14 @@ public class ImgController {
 
 	@RequestMapping(value="/list", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String,Object> list(@ModelAttribute("m") Manager m, @RequestParam("gid") int gid){
-		if (managerService.permission(m, 0)){
-			List<Img> l = imgService.list(gid);
-			HashMap<String,Object> hm = new HashMap<String, Object>();
-			if(l.size()>0 && l.get(0).isTitle()){
-				hm.put("title", l.get(0));
-				hm.put("normal", l.subList(1, l.size()));
-			}else hm.put("normal", l);
-			return hm;
-		}
-		else return null;
+	public Map<String,Object> list(@RequestParam("gid") int gid){
+		List<Img> l = imgService.list(gid);
+		HashMap<String,Object> hm = new HashMap<String, Object>();
+		if(l.size()>0 && l.get(0).isTitle()){
+			hm.put("title", l.get(0));
+			hm.put("normal", l.subList(1, l.size()));
+		}else hm.put("normal", l);
+		return hm;
 	}
 
 }

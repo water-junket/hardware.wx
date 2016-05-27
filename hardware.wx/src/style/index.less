@@ -26,8 +26,54 @@
 
 a.list{
 	display: block;
+	color: black;
+	padding: 5px;
+	border-bottom: 1px solid darken(@main-color,10%);
+	font-size: 0;
 	img{
-		width: 128px;
-		height: 72px;
+		width: 134px;
+		height: 78px;
+		border: 1px solid darken(@main-color,10%);
+		padding: 2px;
+		border-radius: 4px;
+	}
+	section{
+		display: inline-block;
+		vertical-align: top;
+		margin-left: 5px;
+		width: calc(100vw - 149px);
+		header{
+			font-size: 1.2em;
+			line-height: 38px;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			white-space: nowrap;
+		}
+		article.price{
+			margin: -10px 5px;
+			float: right;
+			line-height: 1em;
+			color: @main-color;
+			div{
+				font-size: 0.8em;
+				color: gray;
+				text-decoration: line-through;
+				text-align: right;
+			}
+		}
+		article.param{
+			display: table-cell;
+			height: 40px;
+			line-height: 20px;
+			vertical-align: middle;
+			color: gray;
+		}
+	}
+}
+
+section.swiper-container{
+	img{
+		height: 56.25vw;
+		width: 100vw;
 	}
 }

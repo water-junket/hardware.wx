@@ -16,6 +16,7 @@ public class Goods {
 	private String note;
 	private int sales;
 	private Integer img;
+	private int quantity;
 	/**
 	 * @return the id
 	 */
@@ -171,5 +172,17 @@ public class Goods {
 	 */
 	public void setImg(Integer img) {
 		this.img = img;
+	}
+	/**
+	 * @return the quantity
+	 */
+	public int getQuantity() {
+		return quantity;
+	}
+	/**
+	 * @param quantity the quantity to set
+	 */
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 }

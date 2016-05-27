@@ -21,6 +21,10 @@ public class GoodsService {
 		return goodsDao.select(c, page * step - step + 1, page * step, 1);
 	}
 
+	public Goods select(int id) {
+		return goodsDao.select(id);
+	}
+
 	public boolean insert(Goods g, int mid){
 		g.setLastBy(mid);
 		return goodsDao.insert(g) == 1;

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import site.hardware.wx.bean.Goods;
 import site.hardware.wx.bean.Odata;
 import site.hardware.wx.service.GoodsService;
 import site.hardware.wx.service.OdataService;
@@ -30,9 +31,15 @@ public class GoodsController {
 		return odataService.category(parent);
 	}
 
+	@RequestMapping(value="/detail", method = RequestMethod.POST)
+	@ResponseBody
+	public Goods detail(@RequestParam("id") int id){
+		return goodsService.select(id);
+	}
+
 	@RequestMapping(value="/list", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> goods(@RequestParam("category") int category, @RequestParam(value = "page", required = false, defaultValue = "1") int page, @RequestParam(value = "step", required = false, defaultValue = "8") int step){
+	public Map<String, Object> list(@RequestParam("category") int category, @RequestParam(value = "page", required = false, defaultValue = "1") int page, @RequestParam(value = "step", required = false, defaultValue = "8") int step){
 		HashMap<String, Object> hm = new HashMap<String, Object>();
 		hm.put("list", goodsService.selectAvailable(category, page, step));
 		hm.put("pages", goodsService.countPages(category, step));

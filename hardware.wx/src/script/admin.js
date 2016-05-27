@@ -123,7 +123,7 @@ var vm = avalon.define({
 		},'text');
 	},
 	loadImg: function(){
-		vm.load(apiDomain+"img/list.json",{"m.id": vm.userId, "m.token": vm.token, "gid": vm.goods.id},function(data){
+		vm.load(apiDomain+"img/list.json",{"gid": vm.goods.id},function(data){
 			if(data.title) vm.titleImg={id: data.title.id, actualName: data.title.actualName, oname: data.title.oname};
 			else vm.titleImg={id: 0, actualName: '', oname: ''};
 			vm.normalImg=data.normal;
@@ -150,5 +150,5 @@ require(["domReady!", "mmRequest"], function() {
 		avalon.upload(apiDomain+"img/upload.json",fd,{"m.id": vm.userId, "m.token": vm.token, gid: vm.goods.id},function(){
 			vm.loadImg();
 		},'text');
-	}
+	};
 });
