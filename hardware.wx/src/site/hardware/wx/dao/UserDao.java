@@ -31,7 +31,7 @@ public class UserDao {
 	}
 
 	public User select(String openid){
-		String sql = "select id,name,openid from tbl_user where openid=?";
+		String sql = "select id,name,openid,point from tbl_user where openid=?";
 		Object[] param = new Object[] {openid};
 		try{
 			return jdbcTemplate.queryForObject(sql, param, new BeanPropertyRowMapper<User>(User.class));
