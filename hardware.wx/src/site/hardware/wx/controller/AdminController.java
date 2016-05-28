@@ -1,6 +1,7 @@
 package site.hardware.wx.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +54,13 @@ public class AdminController {
 		return managerService.login(m.md5());
 	}
 
+	@RequestMapping(value="/category", method = RequestMethod.POST)
+	@ResponseBody
+	public List<Odata> category(@ModelAttribute("m") Manager m, @RequestParam(value = "parent", required = false, defaultValue = "-1") int parent){
+		if (managerService.permission(m, 0)) return odataService.category(parent);
+		else return null;
+	}
+
 	@RequestMapping(value="/addCategory", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean addCategory(@ModelAttribute("m") Manager m, @RequestParam(value = "parent", required = false, defaultValue = "-1") int parent, @RequestParam("title") String title){
@@ -77,7 +85,7 @@ public class AdminController {
 	@RequestMapping(value="/addGoods", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean addGoods(@ModelAttribute("m") Manager m, @ModelAttribute("g") Goods g){
-		if (managerService.permission(m, 0)) return goodsService.insert(g, m.getId());
+		if (managerService.permission(m, 0)) return goodsService.add(g, m.getId());
 		else return false;
 	}
 

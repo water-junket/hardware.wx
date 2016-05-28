@@ -16,6 +16,8 @@ public class OdataService {
 
 	private Hashtable<Integer, List<Odata>> category = new Hashtable<Integer, List<Odata>>();
 
+	private Hashtable<Integer, List<Odata>> categoryAvailable = new Hashtable<Integer, List<Odata>>();
+
 	public List<Odata> category(int p){
 		List<Odata> l = category.get(p);
 		if (l == null) {
@@ -26,25 +28,44 @@ public class OdataService {
 		return l;
 	}
 
+	public List<Odata> categoryAvailable(int p){
+		List<Odata> l = categoryAvailable.get(p);
+		if (l == null) {
+			if (p == -1) l = odataDao.select("category", true);
+			else l = odataDao.select(p, true);
+			categoryAvailable.put(p, l);
+		}
+		return l;
+	}
+
 	public boolean addCategory(String t, int p){
 		Odata n = new Odata();
 		n.setCategory("category");
 		n.setName(t);
 		n.setParent(p);
 		boolean flag = odataDao.insert(n) == 1;
-		if (flag) category.remove(p);
+		if (flag) {
+			category.remove(p);
+			categoryAvailable.remove(p);
+		}
 		return flag;
 	}
 
 	public boolean saveCategory(Odata o){
 		boolean flag = odataDao.update(o) == 1;
-		if (flag) category.remove(o.getParent());
+		if (flag) {
+			category.remove(o.getParent());
+			categoryAvailable.remove(o.getParent());
+		}
 		return flag;
 	}
 
 	public boolean statusCategory(Odata o){
 		boolean flag = odataDao.status(o.getId()) == 1;
-		if (flag) category.remove(o.getParent());
+		if (flag) {
+			category.remove(o.getParent());
+			categoryAvailable.remove(o.getParent());
+		}
 		return flag;
 	}
 }

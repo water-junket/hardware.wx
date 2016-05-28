@@ -28,7 +28,7 @@ public class GoodsController {
 	@RequestMapping(value="/category", method = RequestMethod.POST)
 	@ResponseBody
 	public List<Odata> category(@RequestParam(value = "parent", required = false, defaultValue = "-1") int parent){
-		return odataService.category(parent);
+		return odataService.categoryAvailable(parent);
 	}
 
 	@RequestMapping(value="/detail", method = RequestMethod.POST)

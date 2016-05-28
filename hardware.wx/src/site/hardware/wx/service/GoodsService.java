@@ -25,7 +25,7 @@ public class GoodsService {
 		return goodsDao.select(id);
 	}
 
-	public boolean insert(Goods g, int mid){
+	public boolean add(Goods g, int mid){
 		g.setLastBy(mid);
 		return goodsDao.insert(g) == 1;
 	}
