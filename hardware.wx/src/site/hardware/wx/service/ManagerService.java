@@ -23,7 +23,7 @@ public class ManagerService {
 		}else{
 			String token=UUID.randomUUID().toString();
 			m.setToken(token);
-			managerDao.token(m);
+			if(managerDao.token(m) == 0) return "fail";
 			manager.put(m.getId(), m);
 			return token+"||"+m.getId();
 		}

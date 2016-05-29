@@ -13,11 +13,11 @@ public class GoodsService {
 	@Autowired
 	private GoodsDao goodsDao;
 
-	public List<Goods> select(int c, int page, int step){
+	public List<Goods> list(int c, int page, int step){
 		return goodsDao.select(c, page * step - step + 1, page * step);
 	}
 
-	public List<Goods> selectAvailable(int c, int page, int step){
+	public List<Goods> listAvailable(int c, int page, int step){
 		return goodsDao.select(c, page * step - step + 1, page * step, 1);
 	}
 

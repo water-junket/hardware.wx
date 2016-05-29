@@ -29,13 +29,6 @@ public class ReceiverController {
 		else return null;
 	}
 
-	@RequestMapping(value="/add", method = RequestMethod.POST)
-	@ResponseBody
-	public int add(Receiver r, @RequestParam("openid") String openid) {
-		if(userService.permission(r.getUid(), openid)) return receiverService.add(r);
-		else return 0;
-	}
-
 	@RequestMapping(value="/remove", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean remove(int id, @RequestParam("uid") int uid, @RequestParam("openid") String openid) {

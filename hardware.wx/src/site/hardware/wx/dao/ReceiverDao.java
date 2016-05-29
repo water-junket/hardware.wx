@@ -23,9 +23,7 @@ public class ReceiverDao {
 		String sql = "insert into tbl_receiver(uid,name,tel,address) values(?,?,?,?)";
 		Object[] param = new Object[] {r.getUid(), r.getName(), r.getTel(), r.getAddress()};
 		try{
-			jdbcTemplate.update(sql, param);
-			sql = "select ident_current('tbl_receiver')";
-			return jdbcTemplate.queryForObject(sql, Integer.class);
+			return jdbcTemplate.update(sql, param);
 		}catch(DataAccessException e){
 			return 0;
 		}

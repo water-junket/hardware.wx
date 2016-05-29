@@ -9,11 +9,11 @@ public class Order {
 	private String detail;//商品详情
 	private String note;//用户备注
 	private int price;//总价
-	private int payMethod;//0货到付款/1微信支付
+	private int payMethod;//5货到付款/0微信支付
 	private Date orderTime;//下单时间
 	private Date handleTime;//处理时间
 	private Date endTime;//收货时间
-	private int status;//0已下单/1已支付/10已处理/20已收货/-1已取消
+	private int status;//0已下单/5微信已支付/10已处理/20已收货/-1已取消
 	private String annotation;//客服备注
 	/**
 	 * @return the id

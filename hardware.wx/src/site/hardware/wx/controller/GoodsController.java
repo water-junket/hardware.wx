@@ -41,7 +41,7 @@ public class GoodsController {
 	@ResponseBody
 	public Map<String, Object> list(@RequestParam("category") int category, @RequestParam(value = "page", required = false, defaultValue = "1") int page, @RequestParam(value = "step", required = false, defaultValue = "8") int step){
 		HashMap<String, Object> hm = new HashMap<String, Object>();
-		hm.put("list", goodsService.selectAvailable(category, page, step));
+		hm.put("list", goodsService.listAvailable(category, page, step));
 		hm.put("pages", goodsService.countPages(category, step));
 		return hm;
 	}

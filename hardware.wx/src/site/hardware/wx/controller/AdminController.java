@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import site.hardware.wx.bean.Goods;
 import site.hardware.wx.bean.Manager;
 import site.hardware.wx.bean.Odata;
+import site.hardware.wx.bean.OrderSearch;
 import site.hardware.wx.service.GoodsService;
 import site.hardware.wx.service.ManagerService;
 import site.hardware.wx.service.OdataService;
+import site.hardware.wx.service.OrderService;
 
 @Controller
 @RequestMapping("/admin")
@@ -29,6 +31,9 @@ public class AdminController {
 
 	@Autowired
 	private OdataService odataService;
+
+	@Autowired
+	private OrderService orderService;
 
 	@Autowired
 	private GoodsService goodsService;
@@ -108,8 +113,18 @@ public class AdminController {
 	public Map<String, Object> listgoods(@ModelAttribute("m") Manager m, @RequestParam("category") int category, @RequestParam(value = "page", required = false, defaultValue = "1") int page, @RequestParam(value = "step", required = false, defaultValue = "20") int step){
 		if (!managerService.permission(m, 0)) return null;
 		HashMap<String, Object> hm = new HashMap<String, Object>();
-		hm.put("list", goodsService.select(category, page, step));
+		hm.put("list", goodsService.list(category, page, step));
 		hm.put("pages", goodsService.countPages(category, step));
+		return hm;
+	}
+
+	@RequestMapping(value="/listOrder", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> listOrder(OrderSearch os, @ModelAttribute("m") Manager m, @RequestParam(value = "page", required = false, defaultValue = "1") int page, @RequestParam(value = "step", required = false, defaultValue = "20") int step){
+		if (!managerService.permission(m, 0)) return null;
+		HashMap<String, Object> hm = new HashMap<String, Object>();
+		hm.put("list", orderService.list(os, page, step));
+		hm.put("pages", orderService.countPages(os, step));
 		return hm;
 	}
 }

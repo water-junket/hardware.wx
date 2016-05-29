@@ -23,7 +23,7 @@ public class ImgDao {
 		String sql = "insert into tbl_img(gid,oname,ctype,isTitle) values(?,?,?,?)";
 		Object[] param = new Object[] {i.getGid(), i.getOname(), i.getCtype(), i.isTitle()};
 		try{
-			jdbcTemplate.update(sql, param);
+			if (jdbcTemplate.update(sql, param) == 0) return 0;
 			sql = "select ident_current('tbl_img')";
 			return jdbcTemplate.queryForObject(sql, Integer.class);
 		}catch(DataAccessException e){

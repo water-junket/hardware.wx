@@ -17,8 +17,8 @@ public class ReceiverService {
 		return receiverDao.select(uid);
 	}
 
-	public int add(Receiver r) {
-		return receiverDao.insert(r);
+	public boolean add(Receiver r) {
+		return receiverDao.insert(r) == 1;
 	}
 
 	public boolean remove(int id) {
