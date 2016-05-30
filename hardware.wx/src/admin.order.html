@@ -1,1 +1,42 @@
-订单管理
+<aside class="search">
+	<header>过滤条件</header>
+	<label for="oid">订单号</label><input type="number" ms-duplex="oid" id="oid">
+	<label for="otype">订单状态</label>
+	<select ms-duplex="otype" id="otype">
+		<option value="-1">不限</option>
+		<option value="0">待支付</option>
+		<option value="1">待处理</option>
+		<option value="2">待收货</option>
+		<option value="3">已完成</option>
+		<option value="4">已取消</option>
+	</select>
+	<label for="payMethod">支付方式</label>
+	<select ms-duplex="payMethod" id="payMethod">
+		<option value="-1">不限</option>
+		<option value="0">微信支付</option>
+		<option value="5">货到付款</option>
+	</select>
+	<article>下单时间</article>
+	<label for="begin">从</label><input type="text" ms-duplex="begin" id="begin">
+	<label for="end">到</label><input type="text" ms-duplex="end" id="end">
+	<a class="btn" ms-click="orderSearch(1)">确认</a>
+</aside>
+<section class="order">
+	<table>
+		<tr>
+			<th>编号</th><th>商品详细</th><th>总价</th><th>收货信息</th><th>状态</th><th>支付方式</th><th>操作</th>
+		</tr>
+		<tr ms-repeat="orderList">
+			<td>{{el.id}}</td>
+			<td>{{el.detail}}</td>
+			<td>{{el.price}}</td>
+			<td>{{el.receive}}</td>
+			<td>{{el.status}}</td>
+			<td>{{el.payMethod}}</td>
+			<td>
+				<i class="icon-images"></i>
+			</td>
+		</tr>
+	</table>
+	<section class="pages"><i class="icon-arrow-left" ms-click="pageSearch(orderPageCur-1)" ms-if="orderPageCur>1"></i>{{orderPageCur}}/{{orderPages}}<i class="icon-arrow-right" ms-click="pageSearch(orderPageCur+1)" ms-if="orderPageCur<orderPages"></i></section>
+</section>

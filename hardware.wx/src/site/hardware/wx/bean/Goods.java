@@ -17,6 +17,7 @@ public class Goods {
 	private int sales;
 	private Integer img;
 	private int quantity;
+	private String info;
 	/**
 	 * @return the id
 	 */
@@ -184,5 +185,17 @@ public class Goods {
 	 */
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+	/**
+	 * @return the info
+	 */
+	public String getInfo() {
+		return info;
+	}
+	/**
+	 * @param info the info to set
+	 */
+	public void setInfo(String info) {
+		this.info = info;
 	}
 }

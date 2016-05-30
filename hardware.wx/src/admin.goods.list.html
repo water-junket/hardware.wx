@@ -9,7 +9,11 @@
 		<td>{{el.param}}</td>
 		<td>{{el.price}}/{{el.dummyPrice}}</td>
 		<td>{{el.sales}}</td>
-		<td><i class="icon-file-picture" ms-click="goodsToggle('img',el)"></i><i class="icon-pencil" ms-click="goodsToggle('edit',el)"></i><i ms-class="icon-eye{{el.status?'-blocked':''}}" ms-click="statusGoods(el)"></i></td>
+		<td>
+			<i class="icon-images" ms-click="goodsToggle('img',el)"></i>
+			<i class="icon-pencil" ms-click="goodsToggle('edit',el)"></i>
+			<i ms-class="icon-eye{{el.status?'-blocked':''}}" ms-click="statusGoods(el)"></i>
+		</td>
 	</tr>
 </table>
 <section class="pages"><i class="icon-arrow-left" ms-click="pageGoods(goodsPageCur-1)" ms-if="goodsPageCur>1"></i>{{goodsPageCur}}/{{goodsPages}}<i class="icon-arrow-right" ms-click="pageGoods(goodsPageCur+1)" ms-if="goodsPageCur<goodsPages"></i></section>

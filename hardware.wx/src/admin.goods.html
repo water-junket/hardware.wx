@@ -1,16 +1,16 @@
-<section class="category">
+<aside class="category">
 	<header>&nbsp;</header>
 	<section ms-repeat="category1">
 		<a ms-class="btn:category1Cur.id==el.id" ms-click="cat(el)" ms-if="!el.edit">{{el.name}}</a><i class="icon-pencil" ms-click="editCategory(el)" ms-if="!el.edit"></i><input type="text" ms-duplex="el.name" ms-if="el.edit"><i class="icon-floppy-disk" ms-if="el.edit" ms-click="saveCategory(el)"></i><i ms-class="icon-eye{{el.status?'-blocked':''}}" ms-click="statusCategory(el)"></i>
 	</section>
 	<input type="text" ms-duplex="category1New" placeholder="新增"><i class="icon-plus" ms-click="addCategory(category1New,-1)"></i>
-</section>
-<section class="category" ms-if="category1Cur.id">
+</aside>
+<aside class="category" ms-if="category1Cur.id">
 	<header>{{category1Cur.name}}</header>
 	<section ms-repeat="category2">
 		<a ms-class="btn:category2Cur.id==el.id" ms-click="cat(el)" ms-if="!el.edit">{{el.name}}</a><i class="icon-pencil" ms-click="editCategory(el)" ms-if="!el.edit"></i><input type="text" ms-duplex="el.name" ms-if="el.edit"><i class="icon-floppy-disk" ms-if="el.edit" ms-click="saveCategory(el)"></i><i ms-class="icon-eye{{el.status?'-blocked':''}}" ms-click="statusCategory(el)"></i>
 	</section>
 	<input type="text" ms-duplex="category2New" placeholder="新增"><i class="icon-plus" ms-click="addCategory(category2New,category1Cur.id)"></i>
-</section>
+</aside>
 <section class="goods" ms-if="category2Cur.id" ms-include-src="admin.goods.{{goodsTab}}.html">
 </section>

@@ -9,6 +9,7 @@
 <section><label for="category2">小类</label><select id="category2" ms-duplex="goods.category2">
 	<option ms-repeat="category2Temp" ms-attr-value="el.id">{{el.name}}</option>
 </select></section>
-<section><label for="note">购买说明</label><textarea id="note" type="text" ms-duplex="goods.note"></textarea></section>
+<section><label for="info">购买说明</label><textarea id="info" ms-duplex="goods.info"></textarea></section>
+<section><label for="note">商品介绍</label><textarea id="note" ms-duplex="goods.note"></textarea></section>
 <a class="btn" ms-click="saveGoods">提交</a>
 <a class="btn" ms-click="goodsToggle('list')">返回</a>

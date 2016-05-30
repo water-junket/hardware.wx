@@ -4,7 +4,22 @@
 	</div>
 	<div class="swiper-pagination"></div>
 </section>
-{{goods.name}}
-{{goods.param}}
+<section class="nav">
+	<a ms-class="cur:goodsTab=='buy'" ms-click="toggleGoods('buy')">商品订购</a>
+	<a ms-class="cur:goodsTab=='note'" ms-click="toggleGoods('note')">商品介绍</a>
+	<a ms-class="cur:goodsTab=='rate'" ms-click="toggleGoods('rate')">商品评价</a>
+</section>
+<section class="detail buy" ms-if="goodsTab=='buy'">
+	<header class="title">{{goods.name}}</header>
+	<header>{{goods.param}}</header>
+	<a class="btn" ms-attr-href="#!/buy?id={{goods.id}}">购买</a>
+	<article class="price"><div>市场价：{{goods.dummyPrice}}元</div>微信价：{{goods.price}}元</article>
+</section>
+<section class="detail" ms-if="goodsTab=='buy'">
+	<header>购买说明</header>
+</section>
+<section class="detail" ms-if="goodsTab=='note'">
 {{goods.note}}
-<a class="btn" ms-attr-href="#!/buy?id={{goods.id}}">购买</a>
+</section>
+<section class="detail" ms-if="goodsTab=='rate'">
+</section>

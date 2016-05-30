@@ -1,5 +1,6 @@
 eclipse.preferences.version=1
 encoding//src/admin.goods.add.html=UTF-8
+encoding//src/admin.goods.edit.html=UTF-8
 encoding//src/admin.goods.html=UTF-8
 encoding//src/admin.goods.img.html=UTF-8
 encoding//src/admin.goods.list.html=UTF-8
@@ -9,4 +10,5 @@ encoding//src/index.buy.html=UTF-8
 encoding//src/index.detail.html=UTF-8
 encoding//src/index.index.html=UTF-8
 encoding//src/index.list.html=UTF-8
+encoding//src/index.success.html=UTF-8
 encoding/<project>=UTF-8

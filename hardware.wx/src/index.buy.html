@@ -1,3 +1,36 @@
-<section ms-repeat="buy">{{el.quantity}}</section>
-<a class="btn" ms-attr-href="#!/buy?id={{goods.id}}">立刻下单</a>
-<a class="btn" href="#!/index">继续购买</a>
+<section ms-repeat="buy" class="buyList">
+	<header>{{el.name}}</header>
+	<i class="icon-cancel-circle" ms-click="removeGoods($index,el.id)"></i>
+	<section class="quantity"><i class="icon-circle-left" ms-click="quantity(el,-1)"></i>{{el.quantity}}<i class="icon-circle-right" ms-click="quantity(el,1)"></i></section>
+	<span>&yen;{{el.price}}</span>
+</section>
+<section class="nav buy">
+	<a ms-class="cur:receiverTab=='old'" ms-click="toggleReceiver('old')">已保存收货地址</a>
+	<a ms-class="cur:receiverTab=='new'" ms-click="toggleReceiver('new')">新收货地址</a>
+</section>
+<section class="receiver" ms-if="receiverTab=='old'">
+	<div ms-repeat="receiverList" ms-click="chooseRec(el)">
+		<i ms-class="icon-radio-{{el.id==receiver.id?'checked2':'unchecked'}}"></i>
+		<i ms-class="icon-cancel-circle" ms-click="removeRec(el.id)"></i>
+		<article class="name">{{el.name}}</article>
+		<article class="tel">{{el.tel}}</article>
+		<article class="address">{{el.address}}</article>
+	</div>
+</section>
+<section class="receiver" ms-if="receiverTab=='new'">
+	<label for="name">收货人姓名</label><input type="text" ms-duplex="receiver.name" id="name">
+	<label for="address">收货地址</label><input type="text" ms-duplex="receiver.address" id="address">
+	<label for="tel">联系电话</label><input type="number" ms-duplex="receiver.tel" id="tel">
+</section>
+<section class="payMethod">
+	总计：&yen;{{total}}
+	<label for="wxp" ms-class="cur:payMethod==0">微信支付</label><input type="radio" name="payMethod" value="0" ms-duplex-string="payMethod" id="wxp"/>
+	<label for="cod" ms-class="cur:payMethod==5">货到付款</label><input type="radio" name="payMethod" value="5" ms-duplex-string="payMethod" id="cod">
+</section>
+<section class="note">
+	<label for="note">备注</label><input type="text" ms-duplex="note" id="note">
+</section>
+<section class="btns">
+	<a class="btn" ms-click="order" ms-if="buy.size()>0&&receiver.name!=''&&receiver.address!=''&&receiver.tel!=''">立刻下单</a>
+	<a class="btn" href="#!/index">继续购买</a>
+</section>
