@@ -46,8 +46,8 @@ public class OrderSearch {
 		else if(type==4) sb.append(" and status=-1");
 		if(oid!=null && !oid.equals("")) sb.append(" and id=\'").append(oid).append("\'");
 		if(payMethod!=-1) sb.append(" and payMethod=").append(payMethod);
-		if(begin!=null && !begin.equals("")) sb.append(" and orderTime>cast(\'").append(payMethod).append("\' as datetime)");
-		if(end!=null && !end.equals("")) sb.append(" and orderTime<cast(\'").append(payMethod).append("\' as datetime)");
+		if(begin!=null && !begin.equals("")) sb.append(" and orderTime>cast(\'").append(begin).append("\' as datetime)");
+		if(end!=null && !end.equals("")) sb.append(" and orderTime<cast(\'").append(end).append("\' as datetime)");
 		if(sb.length()>0) sb.replace(1, 4, "where");
 		return sb.toString();
 	}
