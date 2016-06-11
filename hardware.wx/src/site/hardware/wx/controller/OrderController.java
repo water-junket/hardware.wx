@@ -5,13 +5,11 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import site.hardware.wx.bean.Manager;
 import site.hardware.wx.bean.Order;
 import site.hardware.wx.bean.Receiver;
 import site.hardware.wx.service.OrderService;
@@ -47,7 +45,7 @@ public class OrderController {
 
 	@RequestMapping(value="/list", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> listOrder(@ModelAttribute("m") Manager m, @RequestParam("uid") int uid, @RequestParam("openid") String openid, @RequestParam(value = "page", required = false, defaultValue = "1") int page, @RequestParam(value = "step", required = false, defaultValue = "20") int step){
+	public Map<String, Object> listOrder(@RequestParam("uid") int uid, @RequestParam("openid") String openid, @RequestParam(value = "page", required = false, defaultValue = "1") int page, @RequestParam(value = "step", required = false, defaultValue = "20") int step){
 		HashMap<String, Object> hm = new HashMap<String, Object>();
 		if(userService.permission(uid, openid)){
 			hm.put("list", orderService.list(uid, page, step));

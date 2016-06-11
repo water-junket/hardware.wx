@@ -73,7 +73,7 @@ public class OrderDao {
 		return jdbcTemplate.queryForObject(sql, param, Integer.class);
 	}
 
-	public int status(int status, int id){
+	public int status(int status, String id, int mid){
 		StringBuilder sql = new StringBuilder("update tbl_order set status=?");
 		if(status==10) sql.append(",handleTime=getdate()");
 		else if(status==20) sql.append(",endTime=getdate()");
@@ -81,7 +81,7 @@ public class OrderDao {
 		return jdbcTemplate.update(sql.append(" where id=?").toString(), param);
 	}
 
-	public int annotation(String annotation, int id){
+	public int annotation(String annotation, String id, int mid){
 		String sql = "update tbl_order set annotation=? where id=?";
 		Object[] param = new Object[] {annotation, id};
 		return jdbcTemplate.update(sql, param);

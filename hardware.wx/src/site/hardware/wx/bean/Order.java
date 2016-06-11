@@ -15,6 +15,7 @@ public class Order {
 	private Date endTime;//收货时间
 	private int status;//0已下单/5微信已支付/10已处理/20已收货/-1已取消
 	private String annotation;//客服备注
+	private boolean edit;
 	/**
 	 * @return the id
 	 */
@@ -164,5 +165,17 @@ public class Order {
 	 */
 	public void setAnnotation(String annotation) {
 		this.annotation = annotation;
+	}
+	/**
+	 * @return the edit
+	 */
+	public boolean isEdit() {
+		return edit;
+	}
+	/**
+	 * @param edit the edit to set
+	 */
+	public void setEdit(boolean edit) {
+		this.edit = edit;
 	}
 }

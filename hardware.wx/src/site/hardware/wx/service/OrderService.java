@@ -27,17 +27,20 @@ public class OrderService {
 	}
 
 	private String getId(){
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+		String today = format.format(new Date());
 		if(lastDay == null){
 			String temp = orderDao.newest();
-			SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-			String today = format.format(new Date());
-			if(temp == null || !temp.substring(0, 6).equals(today)){
+			if(temp == null || !temp.substring(0, 8).equals(today)){
 				lastDay = today;
 				lastNum = 0;
 			}else{
-				lastDay = temp.substring(0, 6);
-				lastNum = Integer.parseInt(temp.substring(6)) + 1;
+				lastDay = temp.substring(0, 8);
+				lastNum = Integer.parseInt(temp.substring(8)) + 1;
 			}
+		}else if(!lastDay.equals(today)){
+			lastDay = today;
+			lastNum = 0;
 		}
 		return lastDay + String.format("%04d", lastNum++);
 	}
@@ -58,5 +61,13 @@ public class OrderService {
 	public int countPages(int uid, int step){
 		int count = orderDao.count(uid);
 		return count / step + (count % step > 0 ? 1 : 0);
+	}
+
+	public boolean status(Order o, int mid) {
+		return orderDao.status(o.getStatus(), o.getId(), mid) == 1;
+	}
+
+	public boolean annotation(Order o, int mid) {
+		return orderDao.annotation(o.getAnnotation(), o.getId(), mid) == 1;
 	}
 }

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import site.hardware.wx.bean.Goods;
 import site.hardware.wx.bean.Manager;
 import site.hardware.wx.bean.Odata;
+import site.hardware.wx.bean.Order;
 import site.hardware.wx.bean.OrderSearch;
 import site.hardware.wx.service.GoodsService;
 import site.hardware.wx.service.ManagerService;
@@ -51,6 +52,11 @@ public class AdminController {
 	@InitBinder("g")  
 	public void initBinder3(WebDataBinder binder) {  
 		binder.setFieldDefaultPrefix("g.");  
+	}
+
+	@InitBinder("r")  
+	public void initBinder4(WebDataBinder binder) {  
+		binder.setFieldDefaultPrefix("r.");  
 	}
 
 	@RequestMapping(value="/login", method = RequestMethod.POST)
@@ -126,5 +132,19 @@ public class AdminController {
 		hm.put("list", orderService.list(os, page, step));
 		hm.put("pages", orderService.countPages(os, step));
 		return hm;
+	}
+
+	@RequestMapping(value="/statusOrder", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean statusOrder(@ModelAttribute("m") Manager m, @ModelAttribute("r") Order r){
+		if (managerService.permission(m, 0)) return orderService.status(r, m.getId());
+		else return false;
+	}
+
+	@RequestMapping(value="/noteOrder", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean noteOrder(@ModelAttribute("m") Manager m, @ModelAttribute("r") Order r){
+		if (managerService.permission(m, 0)) return orderService.annotation(r, m.getId());
+		else return false;
 	}
 }
