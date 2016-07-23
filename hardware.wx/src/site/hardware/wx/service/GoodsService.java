@@ -17,12 +17,12 @@ public class GoodsService {
 		return goodsDao.select(c, page * step - step + 1, page * step);
 	}
 
-	public List<Goods> listAvailable(int c, int page, int step){
-		return goodsDao.select(c, page * step - step + 1, page * step, 1);
+	public List<Goods> listAvailable(int c, int page, int step, String ob){
+		return goodsDao.select(c, page * step - step + 1, page * step, 1, ob);
 	}
 
-	public List<Goods> search(int c, int page, int step, String name){
-		return goodsDao.select(c, page * step - step + 1, page * step, 1, name);
+	public List<Goods> search(int c, int page, int step, String name, String ob){
+		return goodsDao.select(c, page * step - step + 1, page * step, 1, name, ob);
 	}
 
 	public Goods select(int id) {
