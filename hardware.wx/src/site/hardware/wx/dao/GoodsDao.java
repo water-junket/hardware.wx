@@ -47,8 +47,8 @@ public class GoodsDao {
 		}
 	}
 
-	public List<Goods> select(int c, int begin, int end, int status){
-		StringBuilder sql =  new StringBuilder("select ").append(FIELDS).append(",img from (select ").append(FIELDS).append(",img,row_number() over(order by name asc) as rn from v_goods where (category1=? or category2=?) and status=?) as t where rn between ? and ?");
+	public List<Goods> select(int c, int begin, int end, int status, String ob){
+		StringBuilder sql =  new StringBuilder("select ").append(FIELDS).append(",img from (select ").append(FIELDS).append(",img,row_number() over(order by ").append(ob).append(") as rn from v_goods where (category1=? or category2=?) and status=?) as t where rn between ? and ?");
 		Object[] param = new Object[] {c, c, status, begin, end};
 		try{
 			return jdbcTemplate.query(sql.toString(), param, new BeanPropertyRowMapper<Goods>(Goods.class));
@@ -58,8 +58,8 @@ public class GoodsDao {
 		}
 	}
 
-	public List<Goods> select(int c, int begin, int end, int status, String name){
-		StringBuilder sql =  new StringBuilder("select ").append(FIELDS).append(",img from (select ").append(FIELDS).append(",img,row_number() over(order by name asc) as rn from v_goods where (category1=? or category2=?) and status=? and name like ?) as t where rn between ? and ?");
+	public List<Goods> select(int c, int begin, int end, int status, String name, String ob){
+		StringBuilder sql =  new StringBuilder("select ").append(FIELDS).append(",img from (select ").append(FIELDS).append(",img,row_number() over(order by ").append(ob).append(") as rn from v_goods where (category1=? or category2=?) and status=? and name like ?) as t where rn between ? and ?");
 		Object[] param = new Object[] {c, c, status, "%"+name+"%", begin, end};
 		try{
 			return jdbcTemplate.query(sql.toString(), param, new BeanPropertyRowMapper<Goods>(Goods.class));
