@@ -1,6 +1,7 @@
 package site.hardware.wx.service;
 
 import java.util.Hashtable;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,32 +16,40 @@ public class UserService {
 
 	private Hashtable<Integer, String> tokens = new Hashtable<Integer, String>();
 
-	public boolean permission(int uid, String openid){
-		if(tokens.containsKey(uid)){
-			return tokens.get(uid).equals(openid);
+	public boolean permission(User u){
+		if(tokens.containsKey(u.getId())){
+			return tokens.get(u.getId()).equals(u.getToken());
 		}else{
-			User u = login(openid);
-			return u != null && uid == u.getId();
+			User user = userDao.select(u.getName());
+			if(user != null && u.getToken().equals(user.getToken())){
+				tokens.put(user.getId(), user.getToken());
+				return true;
+			}
+			return false;
 		}
 	}
 
-	public User login(String openid){
-		User u = userDao.select(openid);
-		if(u != null) tokens.put(u.getId(), u.getOpenid());
+	public User login(User u){
+		User user = userDao.select(u.md5().getName());
+		if(user != null && u.getPw().equals(user.getPw())){
+			String token=UUID.randomUUID().toString();
+			user.setToken(token);
+			userDao.token(user);
+			tokens.put(user.getId(), token);
+			return user;
+		}
 		return u;
 	}
 
-	public User reg(String openid, String name){
-		User u = new User();
-		u.setName(name);
-		u.setOpenid(openid);
-		int id = userDao.insert(u);
+	public User reg(User u){
+		String token=UUID.randomUUID().toString();
+		u.setToken(token);
+		int id = userDao.insert(u.md5());
 		if(id != 0){
 			u.setId(id);
 			u.setPoint(0);
-			tokens.put(id, openid);
-			return u;
+			tokens.put(id, token);
 		}
-		return null;
+		return u;
 	}
 }

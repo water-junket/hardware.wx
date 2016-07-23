@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import site.hardware.wx.bean.Order;
 import site.hardware.wx.bean.OrderSearch;
 import site.hardware.wx.bean.Receiver;
+import site.hardware.wx.bean.User;
 import site.hardware.wx.dao.OrderDao;
 
 @Service
@@ -20,7 +21,8 @@ public class OrderService {
 	private String lastDay;
 	private int lastNum = 0;
 
-	public String add(Order o, Receiver r){
+	public String add(Order o, User u, Receiver r){
+		o.setUid(u.getId());
 		o.setReceive(r);
 		o.setId(getId());
 		return orderDao.insert(o) == 1 ? o.getId() : "fail";

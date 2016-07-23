@@ -19,8 +19,8 @@ public class UserDao {
 	private JdbcTemplate jdbcTemplate;
 
 	public int insert(User u){
-		String sql = "insert into tbl_user(name,openid) values(?,?)";
-		Object[] param = new Object[] {u.getName(), u.getOpenid()};
+		String sql = "insert into tbl_user(name,pw,token) values(?,?,?)";
+		Object[] param = new Object[] {u.getName(), u.getPw(), u.getToken()};
 		try{
 			jdbcTemplate.update(sql, param);
 			sql = "select ident_current('tbl_user')";
@@ -30,9 +30,9 @@ public class UserDao {
 		}
 	}
 
-	public User select(String openid){
-		String sql = "select id,name,openid,point from tbl_user where openid=?";
-		Object[] param = new Object[] {openid};
+	public User select(String name){
+		String sql = "select id,name,pw,point,token from tbl_user where name=?";
+		Object[] param = new Object[] {name};
 		try{
 			return jdbcTemplate.queryForObject(sql, param, new BeanPropertyRowMapper<User>(User.class));
 		}catch(IncorrectResultSizeDataAccessException e){
@@ -40,4 +40,19 @@ public class UserDao {
 		}
 	}
 
+	public int token(User u){
+		String sql = "update tbl_user set token=? where id=?";
+		Object[] param = new Object[] {u.getToken(), u.getId()};
+		return jdbcTemplate.update(sql, param);
+	}
+
+	public int permission(User u){
+		String sql = "select count(id) from tbl_user where token=? and id=?";
+		Object[] param = new Object[] {u.getToken(), u.getId()};
+		try{
+			return jdbcTemplate.queryForObject(sql, param, Integer.class);
+		}catch(IncorrectResultSizeDataAccessException e){
+			return -1;
+		}
+	}
 }

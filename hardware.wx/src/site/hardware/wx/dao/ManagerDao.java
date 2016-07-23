@@ -18,8 +18,8 @@ public class ManagerDao {
 	private JdbcTemplate jdbcTemplate;
 
 	public Manager login(Manager m){
-		String sql = "select id,name,permission from tbl_manager where name=? and pw=?";
-		Object[] param = new Object[] {m.getName(), m.getPw()};
+		String sql = "select id,name,permission from tbl_manager where pw=? and name=?";
+		Object[] param = new Object[] {m.getPw(), m.getName()};
 		try{
 			return jdbcTemplate.queryForObject(sql, param, new BeanPropertyRowMapper<Manager>(Manager.class));
 		}catch(IncorrectResultSizeDataAccessException e){

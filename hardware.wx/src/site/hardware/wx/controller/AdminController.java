@@ -39,24 +39,24 @@ public class AdminController {
 	@Autowired
 	private GoodsService goodsService;
 
-	@InitBinder("m")  
-	public void initBinder1(WebDataBinder binder) {  
-		binder.setFieldDefaultPrefix("m.");  
+	@InitBinder("m")
+	public void initBinder1(WebDataBinder binder) {
+		binder.setFieldDefaultPrefix("m.");
 	}
 
-	@InitBinder("o")  
-	public void initBinder2(WebDataBinder binder) {  
-		binder.setFieldDefaultPrefix("o.");  
+	@InitBinder("o")
+	public void initBinder2(WebDataBinder binder) {
+		binder.setFieldDefaultPrefix("o.");
 	}
 
-	@InitBinder("g")  
-	public void initBinder3(WebDataBinder binder) {  
-		binder.setFieldDefaultPrefix("g.");  
+	@InitBinder("g")
+	public void initBinder3(WebDataBinder binder) {
+		binder.setFieldDefaultPrefix("g.");
 	}
 
-	@InitBinder("r")  
-	public void initBinder4(WebDataBinder binder) {  
-		binder.setFieldDefaultPrefix("r.");  
+	@InitBinder("r")
+	public void initBinder4(WebDataBinder binder) {
+		binder.setFieldDefaultPrefix("r.");
 	}
 
 	@RequestMapping(value="/login", method = RequestMethod.POST)
