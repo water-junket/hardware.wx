@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import site.hardware.wx.bean.Receiver;
+import site.hardware.wx.bean.User;
 import site.hardware.wx.service.ReceiverService;
 import site.hardware.wx.service.UserService;
 
@@ -24,15 +25,15 @@ public class ReceiverController {
 
 	@RequestMapping(value="/list", method = RequestMethod.POST)
 	@ResponseBody
-	public List<Receiver> list(@RequestParam("uid") int uid, @RequestParam("openid") String openid) {
-		if(userService.permission(uid, openid)) return receiverService.list(uid);
+	public List<Receiver> list(User u) {
+		if(userService.permission(u)) return receiverService.list(u.getId());
 		else return null;
 	}
 
 	@RequestMapping(value="/remove", method = RequestMethod.POST)
 	@ResponseBody
-	public boolean remove(int id, @RequestParam("uid") int uid, @RequestParam("openid") String openid) {
-		if(userService.permission(uid, openid)) return receiverService.remove(id);
+	public boolean remove(User u, @RequestParam("rid") int rid) {
+		if(userService.permission(u)) return receiverService.remove(rid);
 		else return false;
 	}
 }
