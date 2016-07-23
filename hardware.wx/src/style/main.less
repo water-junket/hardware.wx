@@ -1,10 +1,11 @@
-@main-color: #7BA23F;
+@main-color: #ff6600;
+@footer-color: #06b9f0;
 @bg-color: #ecf0f1;
-@shadow-color: rgba(0,0,31,0.5);
-@i-color: spin(@main-color, 120);
+@shadow-color: #b1b1b1;
+@i-color: #6eb82c;
 
 body{
-	margin: 0 0 30px 0;
+	margin: 0 0 62px 0;
 	background-color: @bg-color;
 }
 
@@ -37,6 +38,7 @@ footer{
 	line-height: 30px;
 	padding: 0px;
 	border-radius: 3px;
+	box-shadow: 4px 2px 1px fade(darken(@main-color,40%),50%);
 }
 
 hr{

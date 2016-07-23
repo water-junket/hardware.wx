@@ -7,15 +7,27 @@ input[type='radio']{
 .footer{
 	position: fixed;
 	bottom: 0;
-	background-color: @shadow-color;
+	background-color: white;
+	border-top: 1px solid @shadow-color;
 	width: 100vw;
 	font-size: 0;
 	display: flex;
+	height: 62px;
 	a{
 		display: inline-block;
 		flex: 1;
-		color: lighten(@main-color,20%);
-		line-height: 30px;
+		color: black;
+		font-size: 18px;
+		line-height: 18px;
+		i{
+			color: @shadow-color;
+			font-size: 27px;
+			display: block;
+			line-height: 37px;
+		}
+		&:active,:active{
+			color: @footer-color;
+		}
 	}
 }
 
@@ -28,16 +40,59 @@ input[type='radio']{
 	}
 }
 
+.btns{
+	display: flex;
+	line-height: 45px;
+	border-bottom: 1px solid @shadow-color;
+	a{
+		font-size: 20px;
+		flex: 1;
+		text-align: center;
+		border-right: 1px solid @shadow-color;
+		position: relative;
+		i{
+			position: absolute;
+			font-size: 22px;
+			left: 15px;
+			top: 12px;
+			color: @shadow-color;
+		}
+		&.cur{
+			background-color: white;
+		}
+		&:last-child{
+			border-right: none;
+		}
+	}
+}
+
+.category{
+	position: absolute;
+	right: 0;
+	top: 86px;
+	width: 33.3vw;
+	a{
+		display: block;
+		border-bottom: 1px solid @shadow-color;
+		border-left: 1px solid @shadow-color;
+		background-color: @bg-color;
+		line-height: 24px;
+		color: @main-color;
+		text-align: center;
+	}
+}
+
 a.list{
 	display: block;
 	color: black;
-	padding: 5px;
-	border-bottom: 1px solid darken(@main-color,10%);
+	padding: 10px 13px;
+	border-bottom: 1px solid @shadow-color;
 	font-size: 0;
+	background-color: white;
 	img{
 		width: 134px;
 		height: 78px;
-		border: 1px solid darken(@main-color,10%);
+		border: 1px solid @shadow-color;
 		padding: 2px;
 		border-radius: 4px;
 	}
@@ -45,21 +100,20 @@ a.list{
 		display: inline-block;
 		vertical-align: top;
 		margin-left: 5px;
-		width: calc(100vw - 149px);
+		width: calc(100vw - 165px);
 		header{
 			font-size: 1.2em;
 			line-height: 38px;
 			.ellipsis;
 		}
 		.price{
-			margin: -10px 5px;
+			margin-top: 15px;
 			float: right;
 			line-height: 1em;
 			color: @main-color;
-			div{
+			span{
 				font-size: 0.8em;
 				color: gray;
-				text-decoration: line-through;
 				text-align: right;
 			}
 		}
@@ -78,6 +132,15 @@ a.list{
 		height: 56.25vw;
 		width: 100vw;
 	}
+	.swiper-pagination-bullet{
+		background: white;
+		opacity: 1;
+		width: 14px;
+		height: 14px;
+		&.swiper-pagination-bullet-active{
+			background: @main-color;
+		}
+	}
 }
 
 .nav{
@@ -85,37 +148,50 @@ a.list{
 	background-color: white;
 	margin: 5px 0;
 	display: flex;
+	padding-top: 3px;
 	&.buy{
 		margin: 0;
+		border-top: 1px solid @shadow-color;
+		border-bottom: 1px solid @shadow-color;
+		padding-bottom: 20px;
 	}
 	a{
 		display: inline-block;
 		flex: 1;
 		text-align: center;
-		line-height: 30px;
+		line-height: 40px;
+		font-size: 20px;
 		&.cur{
-			border-bottom: 3px solid @i-color;
+			color: @main-color;
+			border-bottom: 5px solid @main-color;
 		}
 	}
 }
 
 .detail{
 	background-color: white;
-	padding: 0 20px;
-	margin: 5px 0;
+	padding: 15px;
 	header{
 		font-weight: bold;
-		padding-top: 0.5em;
-		&.title{
-			color: @i-color;
-			margin-left: -10px;
-			font-size: 1.2em;
+		margin-left: -5px;
+		font-size: 18px;
+		display: flex;
+		border-top: 1px dotted @shadow-color;
+		line-height: 36px;
+		section{
+			flex: 1;
 		}
 	}
 	&.buy{
+		margin: 5px 0;
+		padding: 0 15px;
+		header{
+			border-top: none;
+		}
 		.price{
-			color: @i-color;
+			color: @main-color;
 			padding-bottom: 0.5em;
+			font-size: 18px;
 			div{
 				font-size: 0.8em;
 				color: gray;
@@ -126,57 +202,129 @@ a.list{
 			display: block;
 			float: right;
 			width: 80px;
+			background-color: @i-color;
+			line-height: 38px;
 		}
 	}
 }
 
 .buyList{
-	padding: 8px 20px;
+	padding: 8px 8px 0 8px;
+	background-color: white;
+	&:first-child{
+		border-top: 1px solid @shadow-color;
+		margin-top: 13px;
+	}
+	div{
+		padding: 0 8px;
+		border-bottom: 1px dotted @shadow-color;
+		overflow: auto;
+	}
 	header{
-		display: inline-block;
+		font-size: 17px;
+		color: @main-color;
+		float: left;
+		width: calc(100vw - 80px);
 	}
-	i{
-		font-size: 24px;
-		&.icon-cancel-circle{
-			float: right;
-		}
-	}
-	.quantity{
+	a.del{
 		float: right;
-		width: 80px;
+		font-size: 12px;
+		color: white;
+		background-color: red;
+		line-height: 23px;
+		width: 48px;
 		text-align: center;
-		margin-right: 10px;
-		.icon-circle-left{
-			float: left;
+	}
+	section{
+		clear: both;
+		font-size: 15px;
+		padding: 5px 0;
+		text-indent: 0.5em;
+		span{
+			color: @main-color;
 		}
-		.icon-circle-right{
-			float: right;
+		&.quantity{
 		}
+		a.opt{
+			line-height: 31px;
+			width: 34px;
+			text-align: center;
+			color: white;
+			background-color: @main-color;
+			display: inline-block;
+			text-indent: 0;
+			&.disable{
+				color: @shadow-color;
+				background-color: @bg-color;
+			}
+		}
+		input{
+			line-height: 25px;
+			text-align: center;
+			width: 110px;
+		}
+	}
+}
+
+.payMethod{
+	background-color: white;
+	text-indent: 0.5em;
+	padding-bottom: 12px;
+	border-bottom: 1px solid @shadow-color;
+	div{
+		font-size: 15px;
+		padding: 12px 8px;
+		border-bottom: 1px dotted @shadow-color;
+		margin: 0 8px;
 	}
 	span{
-		float: right;
-		padding-right: 10px;
+		color: red;
+		font-size: 25px;
 	}
 }
 
-.btns{
-	text-align: center;
-	margin-top: 5px;
-	a{
-		display: inline-block;
-		width: 100px;
-	}
-}
-
-.receiver{
+.buyMore{
 	background-color: white;
-	padding: 5px 20px;
+	padding: 10px;
+	a{
+		display: block;
+		line-height: 40px;
+		font-size: 20px;
+	}
+}
+
+.orderNow{
+	a{
+		text-align: center;
+		margin: 8px auto;
+		display: block;
+		width: 190px;
+		font-size: 20px;
+		line-height: 50px;
+		background-color: @i-color;
+	}
+	height: 64px;
+}
+
+.receiver,.note{
+	background-color: white;
+	padding: 8px 8px 0 8px;
 	label{
-		display: inline-block;
-		width: 30vw;
-		text-align: right;
-		margin-right: 10px;
-		line-height: 32px;
+		display: block;
+		font-size: 18px;
+		span{
+			color: red;
+		}
+	}
+	input,textarea{
+		border: none;
+		border-bottom: 1px dotted @shadow-color;
+		width: 100%;
+		padding: 18px 15px;
+		display: block;
+	}
+	textarea{
+		height: calc(3em + 36px);
 	}
 	div{
 		position: relative;
@@ -199,7 +347,7 @@ a.list{
 			}
 		}
 		.name{
-			width: 120px;
+			width: 100px;
 			display: inline-block;
 		}
 		.tel{
@@ -211,32 +359,9 @@ a.list{
 	}
 }
 
-.payMethod{
-	padding: 5px 20px;
-	line-height: 30px;
-	height: 46px;
-	label{
-		float: right;
-		width: 80px;
-		text-align: center;
-		border: 3px solid @bg-color;
-		border-radius: 3px;
-		&.cur{
-			border: 3px solid @i-color;
-		}
-	}
-}
-
 .note{
-	background-color: white;
-	padding: 5px 10px;
-	label{
-		display: inline-block;
-		width: 30vw;
-		text-align: right;
-		margin-right: 10px;
-		line-height: 32px;
-	}
+	padding-bottom: 14px;
+	border-bottom: 1px solid @shadow-color;
 }
 
 .success{
@@ -250,5 +375,85 @@ a.list{
 		display: block;
 		width: 100px;
 		margin: 20px auto;
+	}
+}
+
+.search{
+	position: relative;
+	background-color: @shadow-color;
+	*{
+		vertical-align: top;
+	}
+	i{
+		font-size: 24px;
+		line-height: 40px;
+		color: white;
+		margin: 0 10px;
+	}
+	input{
+		border: none;
+		border-radius: 15px 0 0 15px;
+		height: 30px;
+		margin-top: 5px;
+		padding-left: 15px;
+		width: calc(100vw - 95px);
+	}
+	a{
+		margin-top: 5px;
+		line-height: 30px;
+		font-size: 15px;
+		background-color: @bg-color;
+		display: inline-block;
+		width: 48px;
+		border-radius: 0 15px 15px 0;
+		padding-left: 5px;
+		border-left: 1px solid @shadow-color;
+		color: @shadow-color;
+	}
+}
+
+.welcome{
+	width: 100%;
+}
+
+.order{
+	width: 100%;
+	text-align: center;
+	border-collapse: collapse;
+	th{
+		border-top: 1px solid @shadow-color;
+		border-bottom: 1px solid @shadow-color;
+		font-size: 24px;
+		line-height: 48px;
+		font-weight: normal;
+	}
+}
+
+.pages{
+	text-align: right;
+	font-size: 1.2em;
+	padding-right: 10px;
+}
+
+.mask{
+	position: absolute;
+	width: 100vw;
+	height: calc(100vh - 62px);
+	background-color: fade(@shadow-color,50%);
+	top: 0;
+	left: 0;
+	table{
+		width: 80%;
+		margin: 20vh auto;
+		background-color: @bg-color;
+		border-radius: 10px;
+		td:first-child{
+			width: 25vw;
+			text-align: right;
+			padding-right: 10px;
+		}
+		td:last-child{
+			.ellipsis;
+		}
 	}
 }

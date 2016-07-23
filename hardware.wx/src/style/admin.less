@@ -1,5 +1,9 @@
 @import "main";
 
+i{
+	text-shadow: 2px 1px 1px fade(darken(@i-color,40%),30%);
+}
+
 table{
 	width: 100%;
 	text-align: right;
@@ -7,6 +11,7 @@ table{
 		color: white;
 		background-color: @i-color;
 		text-align: center;
+		min-width: 70px;
 	}
 	tr:nth-child(even){
 		background-color: lighten(@main-color,40%);
