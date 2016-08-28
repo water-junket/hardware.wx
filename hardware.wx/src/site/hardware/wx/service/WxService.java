@@ -23,7 +23,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class WxService {
 	public static final String APPID = "wx3f1266e65b188c03";
-	public static final String APPSECRET = "419ee142c9f3eb4a9c5b5964b3c44530 ";
+	public static final String APPSECRET = "419ee142c9f3eb4a9c5b5964b3c44530";
 	private static String access_token;
 	private static Date expires;
 	private static final String TOKENURL = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + APPID + "&secret=" + APPSECRET;

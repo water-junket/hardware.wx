@@ -47,7 +47,7 @@ public class OrderController {
 	public Map<String, String> add(Order o, @ModelAttribute("u") User u, @ModelAttribute("r") Receiver r){
 		HashMap<String, String> hm = new HashMap<String, String>();
 		if(userService.permission(u)){
-			if(r.getId() == 0) receiverService.add(r);
+			if(r.getId() == 0) receiverService.add(r, u);
 			String result = orderService.add(o, u, r);
 			if(!result.equals("fail") && o.getPayMethod() == 0){
 				
