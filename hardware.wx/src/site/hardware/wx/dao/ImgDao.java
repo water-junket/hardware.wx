@@ -20,8 +20,8 @@ public class ImgDao {
 	private JdbcTemplate jdbcTemplate;
 
 	public int insert(Img i){
-		String sql = "insert into tbl_img(gid,oname,ctype,isTitle) values(?,?,?,?)";
-		Object[] param = new Object[] {i.getGid(), i.getOname(), i.getCtype(), i.isTitle()};
+		String sql = "insert into tbl_img(gid,oname,ctype,type) values(?,?,?,?)";
+		Object[] param = new Object[] {i.getGid(), i.getOname(), i.getCtype(), i.getType()};
 		try{
 			if (jdbcTemplate.update(sql, param) == 0) return 0;
 			sql = "select ident_current('tbl_img')";

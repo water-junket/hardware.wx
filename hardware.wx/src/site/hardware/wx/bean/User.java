@@ -9,6 +9,8 @@ public class User {
 	private String name;
 	private String pw;
 	private String token;
+	private String tel;
+	private int consume;
 	/**
 	 * @return the id
 	 */
@@ -85,5 +87,29 @@ public class User {
 	 */
 	public void setToken(String token) {
 		this.token = token;
+	}
+	/**
+	 * @return the tel
+	 */
+	public String getTel() {
+		return tel;
+	}
+	/**
+	 * @param tel the tel to set
+	 */
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+	/**
+	 * @return the consume
+	 */
+	public int getConsume() {
+		return consume;
+	}
+	/**
+	 * @param consume the consume to set
+	 */
+	public void setConsume(int consume) {
+		this.consume = consume;
 	}
 }

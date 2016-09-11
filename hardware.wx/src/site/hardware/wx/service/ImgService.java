@@ -34,12 +34,12 @@ public class ImgService {
 		ImgService.path = path;
 	}
 
-	public boolean upload(MultipartFile file, int gid, boolean isTitle){
+	public boolean upload(MultipartFile file, int gid, int type){
 		Img i = new Img();
 		i.setGid(gid);
 		i.setCtype(file.getContentType());
 		i.setOname(file.getOriginalFilename());
-		i.setIsTitle(isTitle);
+		i.setType(type);
 		i.setId(imgDao.insert(i));
 		if (i.getId()==0) return false;
 		String[] l = i.getOname().split("\\.");

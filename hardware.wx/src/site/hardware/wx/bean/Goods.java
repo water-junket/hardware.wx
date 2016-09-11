@@ -15,7 +15,7 @@ public class Goods {
 	private String param;
 	private String note;
 	private int sales;
-	private Integer img;
+	private int img;
 	private int quantity;
 	private String info;
 	/**
@@ -165,13 +165,13 @@ public class Goods {
 	/**
 	 * @return the img
 	 */
-	public Integer getImg() {
+	public int getImg() {
 		return img;
 	}
 	/**
 	 * @param img the img to set
 	 */
-	public void setImg(Integer img) {
+	public void setImg(int img) {
 		this.img = img;
 	}
 	/**
