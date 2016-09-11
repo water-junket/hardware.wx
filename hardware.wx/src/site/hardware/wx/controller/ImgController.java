@@ -78,8 +78,8 @@ public class ImgController {
 
 	@RequestMapping(value="/upload", method = RequestMethod.POST)
 	@ResponseBody
-	public boolean upload(@ModelAttribute("m") Manager m, @RequestParam(value = "imgFile", required = false) MultipartFile imgFile, @RequestParam("gid") int gid, @RequestParam("isTitle") boolean isTitle){
-		if (managerService.permission(m, 0) && !imgFile.isEmpty()) return imgService.upload(imgFile, gid, isTitle);
+	public boolean upload(@ModelAttribute("m") Manager m, @RequestParam(value = "imgFile", required = false) MultipartFile imgFile, @RequestParam("gid") int gid, @RequestParam("type") int type){
+		if (managerService.permission(m, 0) && !imgFile.isEmpty()) return imgService.upload(imgFile, gid, type);
 		else return false;
 	}
 
@@ -95,7 +95,7 @@ public class ImgController {
 	public Map<String,Object> list(@RequestParam("gid") int gid){
 		List<Img> l = imgService.list(gid);
 		HashMap<String,Object> hm = new HashMap<String, Object>();
-		if(l.size()>0 && l.get(0).isTitle()){
+		if(l.size()>0 && l.get(0).getType()==1){
 			hm.put("title", l.get(0));
 			hm.put("normal", l.subList(1, l.size()));
 		}else hm.put("normal", l);

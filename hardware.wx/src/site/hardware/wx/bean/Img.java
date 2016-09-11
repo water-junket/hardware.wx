@@ -7,7 +7,7 @@ public class Img {
 	private int gid;
 	private String oname;
 	private String ctype;
-	private boolean isTitle;
+	private int type;//0轮播图，1列表标题图，2介绍图
 	private Date lastDate;
 	/**
 	 * @return the id
@@ -58,16 +58,16 @@ public class Img {
 		this.ctype = ctype;
 	}
 	/**
-	 * @return the isTitle
+	 * @return the type
 	 */
-	public boolean isTitle() {
-		return isTitle;
+	public int getType() {
+		return type;
 	}
 	/**
-	 * @param isTitle the isTitle to set
+	 * @param type the type to set
 	 */
-	public void setIsTitle(boolean isTitle) {
-		this.isTitle = isTitle;
+	public void setType(int type) {
+		this.type = type;
 	}
 	/**
 	 * @return the lastDate
