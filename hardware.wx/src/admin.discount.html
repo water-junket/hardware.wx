@@ -1,0 +1,8 @@
+<section class="discount">
+满<input ms-duplex="discount.line" type="tel">减<input ms-duplex="discount.reduce" type="tel"><a class="btn" ms-click="addDiscount">新增</a>
+<hr>
+<div ms-repeat="discountList">
+<div ms-if="curDiscount!=el.id">满{{el.line}}减{{el.reduce}}<a class="btn" ms-click="chooseDiscount(el.id)">修改</a><a class="btn" ms-click="removeDiscount(el.id)">删除</a></div>
+<div ms-if="curDiscount==el.id">满<input ms-duplex="el.line" type="tel">减<input ms-duplex="el.reduce" type="tel"><a class="btn" ms-click="saveDiscount(el)">保存</a><a class="btn" ms-click="removeDiscount(el.id)">删除</a></div>
+</div>
+</section>

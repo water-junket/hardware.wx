@@ -98,7 +98,7 @@ table{
 	margin-left: 10px;
 	float: left;
 	width: calc(100vw - 440px);
-	td:last-child,td:first-child{
+	td:last-child,td:first-child,td:nth-child(5){
 		text-align: center;
 	}
 	header{
@@ -150,6 +150,10 @@ table{
 	form{
 		display: block;
 	}
+	.avatar{
+		width: 100px;
+		height: 100px;
+	}
 }
 
 .search{
@@ -184,5 +188,26 @@ table{
 	width: calc(100vw - 200px);
 	td:last-child{
 		text-align: center;
+	}
+}
+
+.user{
+	td:last-child,td:nth-child(4){
+		text-align: center;
+	}
+	input{
+		width: 80px;
+	}
+}
+
+.discount{
+	input{
+		width: 80px;
+		margin: 0 10px;
+	}
+	a.btn{
+		display: inline-block;
+		width: 60px;
+		margin: 0 10px;
 	}
 }

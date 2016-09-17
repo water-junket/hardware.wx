@@ -1,0 +1,20 @@
+<section class="user">
+<table>
+	<tr>
+		<th>用户名</th><th>手机号</th><th>积分</th><th>积分扣除</th><th>累计消费</th><th>重置密码</th>
+	</tr>
+	<tr ms-repeat="userList">
+		<td>{{el.name}}</td>
+		<td>{{el.tel}}</td>
+		<td>{{el.point}}</td>
+		<td>
+			<i class="icon-remove_circle_outline" ms-if="curUser!=el.id" ms-click="chooseUser(el.id)"></i>
+			<input ms-duplex="pointReduce" type="tel" ms-if="curUser==el.id">
+			<i class="icon-floppy-disk" ms-if="curUser==el.id" ms-click="minusPoint(el.id,el.point)"></i>
+		</td>
+		<td>{{el.consume}}</td>
+		<td><i class="icon-switch" ms-click="resetPw(el)"></i></td>
+	</tr>
+</table>
+<section class="pages"><i class="icon-arrow-left" ms-click="pageUser(userPageCur-1)" ms-if="userPageCur>1"></i>{{userPageCur}}/{{userPages}}<i class="icon-arrow-right" ms-click="pageUser(userPageCur+1)" ms-if="userPageCur<userPages"></i></section>
+</section>

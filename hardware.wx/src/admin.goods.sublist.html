@@ -1,0 +1,25 @@
+<header>{{goods.name}}</header>
+<table>
+	<tr>
+		<th>编号</th><th>颜色分类</th><th>价格</th><th>销量</th><th>图片</th><th>操作</th>
+	</tr>
+	<tr ms-repeat="subList">
+		<td>{{el.id}}</td>
+		<td>{{el.name}}</td>
+		<td>{{el.price}}</td>
+		<td>{{el.sales}}</td>
+		<td>
+			<img ms-attr-alt="{{el.name}}" ms-attr-src="imgSrc(el.id,'sub')" ms-if="el.img" class="avatar">
+			<i ms-click="removeImg1(el.id)" class="icon-cancel-circle" ms-if="el.img"></i>
+			<form enctype="multipart/form-data" method="post" ms-attr-name="sub{{el.id}}" ms-if="!el.img">
+				<input type="file" name="imgFile" required="required">
+				<i ms-click="uploadImg1(el.id)" class="icon-floppy-disk"></i>
+			</form>
+		</td>
+		<td>
+			<i class="icon-pencil" ms-click="goodsToggle('subedit',el)"></i>
+			<i ms-class="icon-eye{{el.status?'-blocked':''}}" ms-click="statusSub(el)"></i>
+		</td>
+	</tr>
+</table>
+<a class="btn" ms-click="goodsToggle('subadd')">新增</a><a class="btn" ms-click="goodsToggle('list')">返回</a>

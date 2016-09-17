@@ -1,18 +1,18 @@
 <header>{{category2Cur.name}}</header>
 <table>
 	<tr>
-		<th>编号</th><th>名称</th><th>规格</th><th>价格</th><th>销量</th><th>操作</th>
+		<th>编号</th><th>名称</th><th>价格</th><th>销量</th><th>颜色分类</th><th>操作</th>
 	</tr>
 	<tr ms-repeat="goodsList">
 		<td>{{el.id}}</td>
 		<td>{{el.name}}</td>
-		<td>{{el.param}}</td>
-		<td>{{el.price}}/{{el.dummyPrice}}</td>
+		<td ms-if="el.price<=el.dummyPrice">{{el.price}}~{{el.dummyPrice}}</td>
+		<td ms-if="el.price>el.dummyPrice"></td>
 		<td>{{el.sales}}</td>
+		<td><i class="icon-file-text2" ms-click="goodsToggle('sublist',el)"></i></td>
 		<td>
 			<i class="icon-images" ms-click="goodsToggle('img',el)"></i>
 			<i class="icon-pencil" ms-click="goodsToggle('edit',el)"></i>
-			<i ms-class="icon-eye{{el.status?'-blocked':''}}" ms-click="statusGoods(el)"></i>
 		</td>
 	</tr>
 </table>

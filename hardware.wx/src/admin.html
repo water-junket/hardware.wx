@@ -45,6 +45,8 @@
 	<a ms-class="btn:tab=='goods'" ms-click="toggle('goods')">商品管理</a>
 	<a ms-class="btn:tab=='order'" ms-click="toggle('order')">订单管理</a>
 	<a ms-class="btn:tab=='manager'" ms-click="toggle('manager')">后台管理</a>
+	<a ms-class="btn:tab=='user'" ms-click="toggle('user')">用户管理</a>
+	<a ms-class="btn:tab=='discount'" ms-click="toggle('discount')">满减管理</a>
 </header>
 <section class="main" ms-if="token!=''&&tab!=''" ms-include-src="admin.{{tab}}.html">
 </section>

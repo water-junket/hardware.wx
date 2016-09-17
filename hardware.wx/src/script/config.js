@@ -17,5 +17,9 @@ avalon.config({//似乎这里开头用avalon还是用require效果一样
 //apiDomain="/";
 apiDomain="http://localhost:8080/";
 
-var goods={id: 0,name: '',category1: 0,category2: 0,price: 0,dummyPrice: 0,param: '',note: '',sales: 0,img: 0,info: ''};
-var receiver={id: 0, name: '', address: '', tel: ''}
+var goods={id: 0, name: '', category1: 0, category2: 0, price: 0, dummyPrice: 999999, sales: 0, info: '', act: false};
+var subGoods={id: 0, name: '', gid: 0, price: 0, img: '', status: 0, sales: 0};
+var receiver={id: 0, name: '', address: '', tel: ''};
+var auth={name: '', tel: '', pw: '', repw: ''};
+var discount={line: 0, reduce: 0};
+

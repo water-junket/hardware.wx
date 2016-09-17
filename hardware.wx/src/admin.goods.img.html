@@ -1,25 +1,42 @@
 <header>{{goods.name}}</header>
 <hr>
 <header>标题图片</header>
-<section class="img" ms-if="titleImg.id">
-	<img ms-attr-alt="{{goods.name}}" ms-attr-src="imgSrc(titleImg.id)">
-	<i class="icon-cancel-circle" ms-click="removeImg(titleImg)"></i>
-</section>
-<form ms-if="!titleImg.id" enctype="multipart/form-data" method="post" name="title">
-	<input type="hidden" name="isTitle" value="true">
+<div ms-each="imgs">
+	<section class="img" ms-if="el.type==1">
+		<img ms-attr-alt="{{goods.name}}" ms-attr-src="imgSrc(el.id)">
+		<i class="icon-cancel-circle" ms-click="removeImg(el)"></i>
+	</section>
+</div>
+<form ms-if="!hasTitle" enctype="multipart/form-data" method="post" name="title">
+	<input type="hidden" name="type" value="1">
 	<input type="file" name="imgFile" required="required">
 	<a class="btn" ms-click="uploadImg('title')">提交</a>
 </form>
 <hr>
 <header>轮播图片</header>
-<section class="img" ms-repeat="normalImg">
-	<img ms-attr-alt="{{el.actualName}}" ms-attr-src="imgSrc(el.id)">
-	<i class="icon-cancel-circle" ms-click="removeImg(el)"></i>
-</section>
+<div ms-each="imgs">
+	<section class="img" ms-if="el.type==0">
+		<img ms-attr-alt="{{el.actualName}}" ms-attr-src="imgSrc(el.id)">
+		<i class="icon-cancel-circle" ms-click="removeImg(el)"></i>
+	</section>
+</div>
 <form enctype="multipart/form-data" method="post" name="normal">
-	<input type="hidden" name="isTitle" value="false">
+	<input type="hidden" name="type" value="0">
 	<input type="file" name="imgFile" required="required">
 	<a class="btn" ms-click="uploadImg('normal')">提交</a>
+</form>
+<hr>
+<header>商品介绍图片</header>
+<div ms-each="imgs">
+	<section class="img" ms-if="el.type==2">
+		<img ms-attr-alt="{{el.actualName}}" ms-attr-src="imgSrc(el.id)">
+		<i class="icon-cancel-circle" ms-click="removeImg(el)"></i>
+	</section>
+</div>
+<form enctype="multipart/form-data" method="post" name="note">
+	<input type="hidden" name="type" value="2">
+	<input type="file" name="imgFile" required="required">
+	<a class="btn" ms-click="uploadImg('note')">提交</a>
 </form>
 <hr>
 <a class="btn" ms-click="goodsToggle('list')">返回</a>

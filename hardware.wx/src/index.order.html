@@ -1,0 +1,20 @@
+<section class="welcome">
+	<img alt="avatar" src="/img/avatar.png">
+	<section>
+		<div>用户名：{{user.name}}</div>
+		<div>手机号：{{user.tel}}</div>
+		<div>积分：{{user.point}}</div>
+		<a class="btn" href="#!/editpw">修改密码</a>
+	</section>
+</section>
+<table class="order">
+	<tr>
+		<th>编号</th><th>详情</th><th>状态</th>
+	</tr>
+	<tr ms-repeat="orderList">
+		<td>{{el.id}}</td>
+		<td><i class="icon-file-text2" ms-click="showDetail($index)"></i></td>
+		<td>{{el.status==-1?'已取消':el.status==10?'发货中':el.status==20?'已完成':'待发货'}}</td>
+	</tr>
+</table>
+<section class="pages"><i class="icon-arrow-left" ms-click="loadOrder(orderPageCur-1)" ms-if="orderPageCur>1"></i>{{orderPageCur}}/{{orderPages}}<i class="icon-arrow-right" ms-click="loadOrder(orderPageCur+1)" ms-if="orderPageCur<orderPages"></i></section>

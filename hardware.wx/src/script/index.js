@@ -6,8 +6,8 @@ var goodsList={};
 
 var vm = avalon.define({
 	$id: "hardware",
-	openid: "",
-	showFooter:true,
+	showFooter: true,
+	noInputing: true,
 	tab: 'index',
 	category1: [],
 	category2: [],
@@ -22,12 +22,15 @@ var vm = avalon.define({
 	buy: [],
 	receiverList: [],
 	receiver: avalon.mix({},receiver),
-	user: {name: '韦畋君', id: 1, openid: 'odhGWs5l6Xahi7XXf7Mh7wNYy-ZE', point: 0},
+	//	user: {name: '', id: 0, token: '', point: 0, tel: ''},
+	user: {name: '韦畋君', id: 1, token: 'odhGWs5l6Xahi7XXf7Mh7wNYy-ZE', point: 0, tel: '18948754193'},
 	payMethod: 5,
 	note: '',
 	orderId: '',
 	orderStatus: 0,
 	search: '',
+	auth: auth,
+	beforeAuth: '!/index',
 	$computed: {
 		total:{
 			get: function(){
@@ -69,7 +72,7 @@ var vm = avalon.define({
 		var total=vm.buy.map(function(i){
 			return [i.id,i.name,i.param,i.price,i.quantity].join("@*");
 		}).join("@%");
-		vm.load(apiDomain+"order/add.json",{detail: total, note: vm.note, price: vm.total, payMethod: vm.payMethod, uid: vm.user.id, openid: vm.user.openid, rid: vm.receiver.id, name: vm.receiver.name, address: vm.receiver.address, tel: vm.receiver.tel},function(data){
+		vm.load(apiDomain+"order/add.json",{detail: total, note: vm.note, price: vm.total, payMethod: vm.payMethod, uid: vm.user.id, token: vm.user.token, rid: vm.receiver.id, name: vm.receiver.name, address: vm.receiver.address, tel: vm.receiver.tel},function(data){
 			if(data.result=='fail'){
 				alert("订单提交失败，请稍后再试！");
 			}else{
@@ -87,9 +90,41 @@ var vm = avalon.define({
 	removeRec: function(i){
 		event.stopPropagation();
 		if(vm.receiver.id==i) vm.receiver=avalon.mix({},receiver);
-		vm.load(apiDomain+"rec/remove.json",{id: i, uid: vm.user.id, openid: vm.user.openid},function(flag){
+		vm.load(apiDomain+"rec/remove.json",{rid: i, id: vm.user.id, token: vm.user.token},function(flag){
 			loadReceiver();
 		},'text');
+	},
+	login: function(){
+		if(!(/^1(3[0-9]|4[57]|5[0-35-9]|7[01678]|8[0-9])\d{8}$/.test(vm.auth.tel))) alert("请输入正确的手机号");
+		else if(!(/^\w{6,16}$/.test(vm.auth.pw))) alert("请输入6-16位数字字母或下划线的密码");
+		else vm.load(apiDomain+"wx/login.json", vm.auth, function(data){
+			if(data.id==0) alert("登陆失败");
+			else{
+				vm.user = data;
+				location.hash = vm.beforeAuth;
+			}
+		});
+	},
+	register: function(){
+		if(!(/^\S+$/.test(vm.auth.tel))) alert("请输入昵称");
+		else if(!(/^1(3[0-9]|4[57]|5[0-35-9]|7[01678]|8[0-9])\d{8}$/.test(vm.auth.tel))) alert("请输入正确的手机号");
+		else if(!(/^\w{6,16}$/.test(vm.auth.pw))) alert("请输入6-16位数字字母或下划线的密码");
+		else if(vm.auth.pw!=vm.auth.repw) alert("2次密码输入不一致");
+		else vm.load(apiDomain+"wx/register.json", vm.auth, function(data){
+			if(data.id==0) alert("注册失败");
+			else{
+				vm.user = data;
+				location.hash = vm.beforeAuth;
+			}
+		});
+	},
+	editpw: function(){
+		if(!(/^\w{6,16}$/.test(vm.auth.pw))) alert("请输入6-16位数字字母或下划线的密码");
+		else if(vm.auth.pw!=vm.auth.repw) alert("2次密码输入不一致");
+		else vm.load(apiDomain+"wx/editpw.json", {token: vm.user.token, id: vm.user.id, pw: vm.auth.pw, tel: vm.user.tel}, function(data){
+			if(!data) alert("修改失败");
+			else location.hash = vm.beforeAuth;
+		});
 	},
 	load: function(url,data,fun,type){}
 });
@@ -99,7 +134,7 @@ vm.$watch('receiverTab',function(a,b){
 });
 
 function check(){
-	vm.showFooter=(document.activeElement.tagName.toLowerCase()!="input")&&(document.activeElement.tagName.toLowerCase()!="textarea")&&(window.screen.availHeight/window.screen.availWidth>=1.5);
+	vm.noInputing=(document.activeElement.tagName.toLowerCase()!="input")&&(document.activeElement.tagName.toLowerCase()!="textarea")&&(window.screen.availHeight/window.screen.availWidth>=1.5);
 }
 
 window.addEventListener('resize', check);
@@ -125,7 +160,7 @@ function loadGoods(i,cb){
 }
 
 function loadReceiver(){
-	vm.load(apiDomain+"rec/list.json", {uid: vm.user.id, openid: vm.user.openid}, function(list){
+	vm.load(apiDomain+"rec/list.json", {id: vm.user.id, token: vm.user.token}, function(list){
 		vm.receiverList = list;
 		vm.receiverTab=vm.receiverList.size()==0?"new":"old";
 	});
@@ -133,6 +168,7 @@ function loadReceiver(){
 
 function toggle(){
 	vm.tab=this.path.substring(1);
+	vm.showFooter=true;
 	if(vm.tab=='index'){
 		loadCategory(-1);
 	}else if(vm.tab=="list"){
@@ -159,6 +195,17 @@ function toggle(){
 			vm.buy.push(g);
 		});
 		loadReceiver();
+	}else if(vm.tab=="order"){
+		vm.showFooter = false;
+	}else if(vm.tab=="login"){
+		vm.auth = auth;
+		vm.showFooter = false;
+	}else if(vm.tab=="register"){
+		vm.auth = auth;
+		vm.showFooter = false;
+	}else if(vm.tab=="editpw"){
+		vm.auth = auth;
+		vm.showFooter = false;
 	}
 }
 
@@ -176,6 +223,10 @@ require(["domReady!", "mmRequest", "mmRouter"], function() {
 	avalon.router.get('/detail', toggle);
 	avalon.router.get('/buy', toggle);
 	avalon.router.get('/success', toggle);
+	avalon.router.get('/order', toggle);
+	avalon.router.get('/login', toggle);
+	avalon.router.get('/register', toggle);
+	avalon.router.get('/editpw', toggle);
 
 	avalon.history.start({});
 });

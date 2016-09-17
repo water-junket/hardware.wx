@@ -413,7 +413,30 @@ a.list{
 }
 
 .welcome{
-	width: 100%;
+	width: 100vw;
+	height: 52vw;
+	background-image: url('/img/order.jpg');
+	background-size: cover;
+	position: relative;
+	img{
+		position: absolute;
+		width: 28vw;
+		left: 9vw;
+		top: 12vw;
+	}
+	section{
+		position: absolute;
+		line-height: 26px;
+		color: white;
+		a{
+			line-height: 32px;
+			display: block;
+			width: 28vw;
+			margin-top: 5px;
+		}
+		bottom: 3.5vw;
+		left: 47vw;
+	}
 }
 
 .order{
@@ -423,8 +446,8 @@ a.list{
 	th{
 		border-top: 1px solid @shadow-color;
 		border-bottom: 1px solid @shadow-color;
-		font-size: 24px;
-		line-height: 48px;
+		font-size: 18px;
+		line-height: 44px;
 		font-weight: normal;
 	}
 }
@@ -455,5 +478,43 @@ a.list{
 		td:last-child{
 			.ellipsis;
 		}
+	}
+}
+
+.auth{
+	header{
+		line-height: 45px;
+		font-size: 18px;
+		text-align: center;
+		border-bottom: 1px solid @shadow-color;
+		background-color: lighten(@bg-color, 3%);
+	}
+	section{
+		margin: 17px 0;
+		background-color: white;
+		div{
+			line-height: 49px;
+			border-bottom: 1px solid @shadow-color;
+			label{
+				width: 24vw;
+				display: inline-block;
+				padding-left: 10px;
+			}
+			input{
+				width: 76vw;
+				border: none;
+			}
+		}
+	}
+	a.btn{
+		display: block;
+		line-height: 48px;
+		margin: 0 10px;
+		color: lighten(@main-color, 40%) !important;
+	}
+	a.register{
+		color: @main-color;
+		float: right;
+		margin: 15px 10px;
 	}
 }
