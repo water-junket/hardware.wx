@@ -12,7 +12,7 @@ import site.hardware.wx.bean.Goods;
 
 @Repository
 public class GoodsDao {
-	private static final String FIELDS = "id,name,category1,category2,price,dummyPrice,param,note,sales,status,info";
+	private static final String FIELDS = "id,name,category1,category2,price,dummyPrice,sales,status,info,act";
 
 	/**
 	 * 自动装配的数据库链接模板
@@ -21,8 +21,8 @@ public class GoodsDao {
 	private JdbcTemplate jdbcTemplate;
 
 	public int insert(Goods g){
-		String sql = "insert into tbl_goods(name,lastBy,category1,category2,price,dummyPrice,param,note,info) values(?,?,?,?,?,?,?,?,?)";
-		Object[] param = new Object[] {g.getName(), g.getLastBy(), g.getCategory1(), g.getCategory2(), g.getPrice(), g.getDummyPrice(), g.getParam(), g.getNote(), g.getInfo()};
+		String sql = "insert into tbl_goods(name,lastBy,category1,category2,info,act) values(?,?,?,?,?,?)";
+		Object[] param = new Object[] {g.getName(), g.getLastBy(), g.getCategory1(), g.getCategory2(), g.getInfo(), g.isAct()?1:0};
 		return jdbcTemplate.update(sql, param);
 	}
 
@@ -88,20 +88,26 @@ public class GoodsDao {
 	}
 
 	public int update(Goods g){
-		String sql = "update tbl_goods set name=?,lastBy=?,lastTime=getdate(),category1=?,category2=?,price=?,dummyPrice=?,param=?,note=?,info=? where id=?";
-		Object[] param = new Object[] {g.getName(), g.getLastBy(), g.getCategory1(), g.getCategory2(), g.getPrice(), g.getDummyPrice(), g.getParam(), g.getNote(), g.getInfo(), g.getId()};
+		String sql = "update tbl_goods set name=?,lastBy=?,lastTime=getdate(),category1=?,category2=?,info=?,act=? where id=?";
+		Object[] param = new Object[] {g.getName(), g.getLastBy(), g.getCategory1(), g.getCategory2(), g.getInfo(), g.isAct(), g.getId()};
 		return jdbcTemplate.update(sql, param);
 	}
 
 	public int status(int id, int mid){
-		String sql = "update tbl_goods set status=1-status where id=?";
-		Object[] param = new Object[] {id};
+		String sql = "update tbl_goods set status=case (select count(1) from tbl_sub_goods where gid=? and status=1) when 0 then 0 else 1 end where id=?";
+		Object[] param = new Object[] {id, id};
 		return jdbcTemplate.update(sql, param);
 	}
 
 	public int sales(int id, int sales){
 		String sql = "update tbl_goods set sales=sales+? where id=?";
 		Object[] param = new Object[] {sales, id};
+		return jdbcTemplate.update(sql, param);
+	}
+
+	public int price(int id){
+		String sql = "update tbl_goods set price=isnull((select min(price) from tbl_sub_goods where gid=? and status=1),999999),dummyPrice=isnull((select max(price) from tbl_sub_goods where gid=? and status=1),0) where id=?";
+		Object[] param = new Object[] {id, id, id};
 		return jdbcTemplate.update(sql, param);
 	}
 }

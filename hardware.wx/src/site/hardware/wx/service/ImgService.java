@@ -9,11 +9,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 import site.hardware.wx.bean.Img;
 import site.hardware.wx.dao.ImgDao;
+import site.hardware.wx.dao.SubGoodsDao;
 
 @Service
 public class ImgService {
 	@Autowired
 	private ImgDao imgDao;
+
+	@Autowired
+	private SubGoodsDao subGoodsDao;
 
 	/**
 	 * 文件路径，用配置文件注入
@@ -54,10 +58,30 @@ public class ImgService {
 		}
 	}
 
+	public boolean upload1(MultipartFile file, int id, int mid){
+		if (subGoodsDao.img(id, file.getContentType(), mid) == 0) return false;
+		File temp = new File(path, "sub" + id);
+		try {
+			file.transferTo(temp);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			subGoodsDao.delImg(id, mid);
+			return false;
+		}
+	}
+
 	public boolean remove(int id, String aname){
 		File temp = new File(path, aname);
 		if (!temp.exists()) return false;
 		if (imgDao.delete(id) == 0 ) return false;
+		return temp.delete();
+	}
+
+	public boolean remove1(int id, int mid){
+		File temp = new File(path, "sub" + id);
+		if (!temp.exists()) return false;
+		if (subGoodsDao.delImg(id,mid) == 0 ) return false;
 		return temp.delete();
 	}
 
