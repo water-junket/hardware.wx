@@ -13,7 +13,7 @@ public class Order {
 	private Date orderTime;//下单时间
 	private Date handleTime;//处理时间
 	private Date endTime;//收货时间
-	private int status;//0已下单/5微信已支付/10已处理/20已收货/-1已取消
+	private int status;//0已下单/5微信已支付/10已处理/20已收货/-1已取消/-2已退货
 	private String annotation;//客服备注
 	private boolean edit;
 	/**

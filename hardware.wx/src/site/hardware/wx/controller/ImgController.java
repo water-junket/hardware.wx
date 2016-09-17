@@ -5,9 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -24,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import site.hardware.wx.bean.Img;
 import site.hardware.wx.bean.Manager;
+import site.hardware.wx.service.GoodsService;
 import site.hardware.wx.service.ImgService;
 import site.hardware.wx.service.ManagerService;
 
@@ -41,12 +40,24 @@ public class ImgController {
 	@Autowired
 	private ImgService imgService;
 
+	@Autowired
+	private GoodsService goodsService;
+
 	@RequestMapping(value="/download", method = RequestMethod.GET)
-	public void download(@RequestParam("id") int id, HttpServletResponse response){
-		Img i = imgService.download(id);
-		response.setContentType(i.getCtype());
-		response.setHeader("Content-Disposition", "attachment;filename=" + i.getOname());
-		String file = ImgService.getPath() + File.separator + i.getActualName();
+	public void download(@RequestParam("id") int id, @RequestParam(value="type", required=false, defaultValue="") String type, HttpServletResponse response){
+		String file = ImgService.getPath() + File.separator + "empty.jpg";
+//		response.setContentType("image/png");
+//		response.setHeader("Content-Disposition", "attachment;filename=404.png");
+		if(type.equals("")){
+			Img i = imgService.download(id);
+			response.setContentType(i.getCtype());
+			response.setHeader("Content-Disposition", "attachment;filename=" + i.getOname());
+			file = ImgService.getPath() + File.separator + i.getActualName();
+		}else{
+			file = ImgService.getPath() + File.separator + type + id;
+			response.setContentType(goodsService.subCtype(id));
+			response.setHeader("Content-Disposition", "attachment;filename=" + type + id + ".jpg");
+		}
 		FileInputStream fis = null;
 		OutputStream os = null;
 		try{
@@ -83,6 +94,13 @@ public class ImgController {
 		else return false;
 	}
 
+	@RequestMapping(value="/upload1", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean upload1(@ModelAttribute("m") Manager m, @RequestParam(value = "imgFile", required = false) MultipartFile imgFile, @RequestParam("sid") int sid){
+		if (managerService.permission(m, 0) && !imgFile.isEmpty()) return imgService.upload1(imgFile, sid, m.getId());
+		else return false;
+	}
+
 	@RequestMapping(value="/remove", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean remove(@ModelAttribute("m") Manager m, @RequestParam("iid") int iid, @RequestParam("aname") String aname){
@@ -90,16 +108,17 @@ public class ImgController {
 		else return false;
 	}
 
+	@RequestMapping(value="/remove1", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean remove1(@ModelAttribute("m") Manager m, @RequestParam("sid") int sid){
+		if (managerService.permission(m, 0)) return imgService.remove1(sid, m.getId());
+		else return false;
+	}
+
 	@RequestMapping(value="/list", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String,Object> list(@RequestParam("gid") int gid){
-		List<Img> l = imgService.list(gid);
-		HashMap<String,Object> hm = new HashMap<String, Object>();
-		if(l.size()>0 && l.get(0).getType()==1){
-			hm.put("title", l.get(0));
-			hm.put("normal", l.subList(1, l.size()));
-		}else hm.put("normal", l);
-		return hm;
+	public List<Img> list(@RequestParam("gid") int gid){
+		return imgService.list(gid);
 	}
 
 }

@@ -47,6 +47,14 @@ public class WxController {
 		return userService.reg(u);
 	}
 
+	@RequestMapping(value="/editpw", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean editpw(User u){
+		if(userService.permission(u)){
+			return userService.edit(u);
+		}else return false;
+	}
+
 //	@RequestMapping(value="/login", method = RequestMethod.POST)
 //	@ResponseBody
 //	public User login(@RequestParam("code") String code){
