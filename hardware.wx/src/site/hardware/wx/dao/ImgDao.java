@@ -38,13 +38,13 @@ public class ImgDao {
 	}
 
 	public Img select(int id){
-		String sql = "select id,gid,oname,ctype,isTitle from tbl_img where id=?";
+		String sql = "select id,gid,oname,ctype,type from tbl_img where id=?";
 		Object[] param = new Object[] {id};
 		return jdbcTemplate.queryForObject(sql, param, new BeanPropertyRowMapper<Img>(Img.class));
 	}
 
 	public List<Img> selectList(int gid){
-		String sql = "select id,gid,oname,ctype,isTitle from tbl_img where gid=? order by isTitle desc";
+		String sql = "select id,gid,oname,ctype,type from tbl_img where gid=? order by type desc";
 		Object[] param = new Object[] {gid};
 		return jdbcTemplate.query(sql, param, new BeanPropertyRowMapper<Img>(Img.class));
 	}

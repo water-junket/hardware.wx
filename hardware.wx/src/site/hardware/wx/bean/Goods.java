@@ -12,12 +12,10 @@ public class Goods {
 	private int price;
 	private int dummyPrice;
 	private boolean status;//0下架/1上架
-	private String param;
-	private String note;
 	private int sales;
 	private int img;
-	private int quantity;
 	private String info;
+	private boolean act;
 	/**
 	 * @return the id
 	 */
@@ -127,30 +125,6 @@ public class Goods {
 		this.status = status;
 	}
 	/**
-	 * @return the param
-	 */
-	public String getParam() {
-		return param;
-	}
-	/**
-	 * @param param the param to set
-	 */
-	public void setParam(String param) {
-		this.param = param;
-	}
-	/**
-	 * @return the note
-	 */
-	public String getNote() {
-		return note;
-	}
-	/**
-	 * @param note the note to set
-	 */
-	public void setNote(String note) {
-		this.note = note;
-	}
-	/**
 	 * @return the sales
 	 */
 	public int getSales() {
@@ -175,18 +149,6 @@ public class Goods {
 		this.img = img;
 	}
 	/**
-	 * @return the quantity
-	 */
-	public int getQuantity() {
-		return quantity;
-	}
-	/**
-	 * @param quantity the quantity to set
-	 */
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
-	/**
 	 * @return the info
 	 */
 	public String getInfo() {
@@ -197,5 +159,17 @@ public class Goods {
 	 */
 	public void setInfo(String info) {
 		this.info = info;
+	}
+	/**
+	 * @return the act
+	 */
+	public boolean isAct() {
+		return act;
+	}
+	/**
+	 * @param act the act to set
+	 */
+	public void setAct(boolean act) {
+		this.act = act;
 	}
 }

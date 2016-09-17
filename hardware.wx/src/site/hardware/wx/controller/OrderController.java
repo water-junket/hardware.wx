@@ -1,6 +1,7 @@
 package site.hardware.wx.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import site.hardware.wx.bean.Discount;
 import site.hardware.wx.bean.Order;
 import site.hardware.wx.bean.Receiver;
 import site.hardware.wx.bean.User;
+import site.hardware.wx.service.DiscountService;
 import site.hardware.wx.service.OrderService;
 import site.hardware.wx.service.ReceiverService;
 import site.hardware.wx.service.UserService;
@@ -31,6 +34,9 @@ public class OrderController {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private DiscountService discountService;
 
 	@InitBinder("u")
 	public void initBinder1(WebDataBinder binder) {
@@ -49,9 +55,9 @@ public class OrderController {
 		if(userService.permission(u)){
 			if(r.getId() == 0) receiverService.add(r, u);
 			String result = orderService.add(o, u, r);
-			if(!result.equals("fail") && o.getPayMethod() == 0){
-				
-			}
+//			if(!result.equals("fail") && o.getPayMethod() == 0){
+//				
+//			}
 			hm.put("result", result);
 		}else hm.put("result", "fail");
 		return hm;
@@ -59,7 +65,7 @@ public class OrderController {
 
 	@RequestMapping(value="/list", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> listOrder(@ModelAttribute("u") User u, @RequestParam(value = "page", required = false, defaultValue = "1") int page, @RequestParam(value = "step", required = false, defaultValue = "20") int step){
+	public Map<String, Object> list(User u, @RequestParam(value = "page", required = false, defaultValue = "1") int page, @RequestParam(value = "step", required = false, defaultValue = "20") int step){
 		HashMap<String, Object> hm = new HashMap<String, Object>();
 		if(userService.permission(u)){
 			hm.put("list", orderService.list(u.getId(), page, step));
@@ -67,5 +73,11 @@ public class OrderController {
 			hm.put("result", true);
 		}else hm.put("result", false);
 		return hm;
+	}
+
+	@RequestMapping(value="/discount", method = RequestMethod.POST)
+	@ResponseBody
+	public List<Discount> discount() {
+		return discountService.select();
 	}
 }

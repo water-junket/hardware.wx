@@ -1,6 +1,7 @@
 package site.hardware.wx.service;
 
 import java.util.Hashtable;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class UserService {
 		if(tokens.containsKey(u.getId())){
 			return tokens.get(u.getId()).equals(u.getToken());
 		}else{
-			User user = userDao.select(u.getName());
+			User user = userDao.select(u.getTel());
 			if(user != null && u.getToken().equals(user.getToken())){
 				tokens.put(user.getId(), user.getToken());
 				return true;
@@ -30,7 +31,7 @@ public class UserService {
 	}
 
 	public User login(User u){
-		User user = userDao.select(u.md5().getName());
+		User user = userDao.select(u.md5().getTel());
 		if(user != null && u.getPw().equals(user.getPw())){
 			String token=UUID.randomUUID().toString();
 			user.setToken(token);
@@ -51,5 +52,46 @@ public class UserService {
 			tokens.put(id, token);
 		}
 		return u;
+	}
+
+	public boolean edit(User u){
+		return userDao.pw(u.md5()) == 1;
+	}
+
+	public boolean reset(int id, String tel){
+		User u=new User();
+		u.setId(id);
+		u.setPw("123456");
+		u.setTel(tel);
+		return edit(u);
+	}
+
+	public List<User> list(int page, int step){
+		return userDao.select(page * step - step + 1, page * step);
+	}
+
+	public int countPages(int step){
+		int count = userDao.count();
+		return count / step + (count % step > 0 ? 1 : 0);
+	}
+
+	/**
+	 * @param id
+	 * @param point
+	 * @return
+	 * @see site.hardware.wx.dao.UserDao#point(int, int)
+	 */
+	public boolean point(int id, int point) {
+		return userDao.point(id, point) == 1;
+	}
+
+	/**
+	 * @param id
+	 * @param consume
+	 * @return
+	 * @see site.hardware.wx.dao.UserDao#consume(int, int)
+	 */
+	public boolean consume(int id, int consume) {
+		return userDao.consume(id, consume) == 1;
 	}
 }
