@@ -178,7 +178,19 @@ public class AdminController {
 	@RequestMapping(value="/statusOrder", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean statusOrder(@ModelAttribute("m") Manager m, @ModelAttribute("r") Order r){
-		if (managerService.permission(m, 0)) return orderService.status(r, m.getId());
+		if (managerService.permission(m, 0)){
+			boolean flag=orderService.status(r, m.getId());
+			if (flag){
+				if (r.getStatus() == 20){
+					goodsService.sales(r.getDetail(), 1);
+					userService.consume(r.getUid(), r.getPrice());
+				}else if(r.getStatus() == -2){
+					goodsService.sales(r.getDetail(), -1);
+					userService.consume(r.getUid(), -r.getPrice());
+				}
+			}
+			return flag;
+		}
 		else return false;
 	}
 

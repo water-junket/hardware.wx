@@ -1,5 +1,6 @@
 <section class="success">
 	您的订单已{{orderStatus==0?'下单':'支付'}}成功！
 	<article ms-if="orderStatus+payMethod<5">您可以选择<a>立即支付</a>，或者稍后去<a>我的订单</a>中支付。</article>
+	<article ms-if="orderStatus+payMethod>=5">商品正在出库，请耐心等待。</article>
 	<a class="btn" href="#!/index">返回首页</a>
 </section>

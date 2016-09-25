@@ -1,6 +1,6 @@
 <section class="swiper-container">
 	<div class="swiper-wrapper">
-		<img ms-repeat="img" ms-attr-src="imgSrc(el.id)" class="swiper-slide">
+		<img ms-repeat="img" ms-attr-src="imgSrc(el.id)" class="swiper-slide" ms-visible="el.type==0">
 	</div>
 	<div class="swiper-pagination"></div>
 </section>
@@ -11,15 +11,44 @@
 </section>
 <section class="detail buy" ms-if="goodsTab=='buy'">
 	<header class="title">{{goods.name}}</header>
-	<header>{{goods.param}}</header>
-	<a class="btn" ms-attr-href="#!/buy?id={{goods.id}}">购买</a>
-	<article class="price"><div>市场价：{{goods.dummyPrice}}元</div>微信价：{{goods.price}}元</article>
+	<a class="btn" ms-click="toggleMaskShow" ms-click-1="showSub">购买</a>
+	<article class="price"><br>微信价：{{goods.price}}元~{{goods.dummyPrice}}元</article>
 </section>
 <section class="detail" ms-if="goodsTab=='buy'">
 	<header>购买说明</header>
+	<div ms-if="goods.act">该商品参与满减活动</div>
+	<div ms-if="!goods.act">该商品不参与满减活动</div>
+	{{goods.info}}
 </section>
-<section class="detail" ms-if="goodsTab=='note'">
-{{goods.note}}
+<section class="detail note" ms-if="goodsTab=='note'">
+	<img ms-repeat="img" ms-attr-src="imgSrc(el.id)" ms-visible="el.type==2">
 </section>
 <section class="detail" ms-if="goodsTab=='rate'">
+</section>
+<section class="mask" ms-if="maskShow">
+	<div class="sub">
+		<div class="content">
+			<i class="icon-cancel-circle" ms-click="toggleMaskShow"></i>
+			<img ms-attr-src="imgSrc(subCur.id,'sub')" ms-if="subCur.id!=0">
+			<header>
+				<span ms-if="subCur.id!=0">&yen;{{subCur.price}}</span>
+				<span ms-if="subCur.id==0">&yen;{{goods.price}}~{{goods.dummyPrice}}</span>
+				<br>请选择颜色分类
+			</header>
+			<div>颜色分类</div>
+			<ul>
+				<li ms-repeat="subList" ms-click="setSubCur(el)" ms-class="cur:subCur.id==el.id">{{el.name}}</li>
+			</ul>
+			<div class="buy">
+				购买数量
+				<section class="numControl">
+					<a ms-click="addCount(-1)" ms-class="disabled:count<=1">-</a>
+					<span>{{count}}</span>
+					<a ms-click="addCount(1)">+</a>
+				</section>
+			</div>
+			<a class="btn disabled" ms-if="subCur.id==0">确定</a>
+			<a class="btn" ms-if="subCur.id!=0" ms-click="gotoCart">确定</a>
+		</div>
+	</div>
 </section>

@@ -6,9 +6,10 @@
 		<option value="-1">不限</option>
 		<option value="0">待支付</option>
 		<option value="1">待处理</option>
-		<option value="2">待收货</option>
+		<option value="2">进行中</option>
 		<option value="3">已完成</option>
 		<option value="4">已取消</option>
+		<option value="5">已退货</option>
 	</select>
 	<label for="payMethod">支付方式</label>
 	<select ms-duplex="payMethod" id="payMethod">
@@ -24,17 +25,20 @@
 <section class="order">
 	<table>
 		<tr>
-			<th>编号</th><th>商品详细</th><th>总价</th><th>收货信息</th><th>状态</th><th>支付方式</th><th>操作</th>
+			<th>编号</th><th>商品详细</th><th>总价</th><th>收货信息</th><th>状态</th><!--th>支付方式</th--><th>操作</th>
 		</tr>
 		<tr ms-repeat="orderList">
 			<td>{{el.id}}</td>
 			<td>{{el.detail}}</td>
 			<td>{{el.price}}</td>
 			<td>{{el.receive}}</td>
-			<td>{{el.status}}</td>
-			<td>{{el.payMethod}}</td>
+			<td>{{el.status==-2?'已退货':el.status==-1?'已取消':el.status==10?'进行中':el.status==20?'已完成':'待处理'}}</td>
+			<!--td>{{el.payMethod}}</td-->
 			<td>
-				<i class="icon-images"></i>
+				<i class="icon-truck" ms-if="el.status==0" ms-click="statusOrder(el,10)"></i>
+				<i class="icon-gift" ms-if="el.status==10" ms-click="statusOrder(el,20)"></i>
+				<i class="icon-cancel-circle" ms-if="el.status==0||el.status==10" ms-click="statusOrder(el,-1)"></i>
+				<i class="icon-cancel-circle" ms-if="el.status==20" ms-click="statusOrder(el,-2)"></i>
 			</td>
 		</tr>
 	</table>

@@ -188,12 +188,17 @@ var vm = avalon.define({
 			vm.orderPageCur=i;
 		});
 	},
+	statusOrder: function(el,s){
+		vm.load(apiDomain+"admin/statusOrder.json",{"m.id": vm.userId, "m.token": vm.token, "r.id": el.id, "r.status": s, "r.detail": el.detail, "r.uid": el.uid, "r.price": el.price},function(flag){
+			if(eval(flag)) el.status=s;
+		},'text');
+	},
 	chooseUser: function(id){
 		vm.curUser = id;
 		vm.pointReduce = 0;
 	},
 	minusPoint: function(i,p){
-		if(vm.pointReduce==0 || vm.pointReduce>p) alert("请输入有效数字");
+		if(vm.pointReduce<=0 || vm.pointReduce>p) alert("请输入有效数字");
 		else vm.load(apiDomain+"admin/minusPoint.json",{"m.id": vm.userId, "m.token": vm.token, uid: i, point: vm.pointReduce},function(flag){
 			if(eval(flag)) loadUser(vm.userPageCur);
 			vm.curUser=0;

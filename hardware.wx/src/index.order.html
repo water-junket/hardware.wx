@@ -13,8 +13,32 @@
 	</tr>
 	<tr ms-repeat="orderList">
 		<td>{{el.id}}</td>
-		<td><i class="icon-file-text2" ms-click="showDetail($index)"></i></td>
-		<td>{{el.status==-1?'已取消':el.status==10?'发货中':el.status==20?'已完成':'待发货'}}</td>
+		<td><i class="icon-file-text2" ms-click="toggleMaskShow" ms-click-1="showOrder(el)"></i></td>
+		<td>{{el.status==-2?'已退货':el.status==-1?'已取消':el.status==10?'发货中':el.status==20?'已完成':'待发货'}}</td>
 	</tr>
 </table>
 <section class="pages"><i class="icon-arrow-left" ms-click="loadOrder(orderPageCur-1)" ms-if="orderPageCur>1"></i>{{orderPageCur}}/{{orderPages}}<i class="icon-arrow-right" ms-click="loadOrder(orderPageCur+1)" ms-if="orderPageCur<orderPages"></i></section>
+<section class="mask" ms-if="maskShow" ms-click="toggleMaskShow">
+	<table>
+		<tr>
+			<td>商品列表</td>
+			<td><div ms-repeat="orderDetail">{{el}}</div></td>
+		</tr>
+		<tr>
+			<td>收货地址</td>
+			<td ms-html="orderShow.receive.split('/').join('<br>')"></td>
+		</tr>
+		<tr>
+			<td>备注</td>
+			<td>{{orderShow.note}}</td>
+		</tr>
+		<tr>
+			<td>下单时间</td>
+			<td>{{new Date(orderShow.orderTime).toLocaleString()}}</td>
+		</tr>
+		<tr ms-if="orderShow.endTime">
+			<td>完成时间</td>
+			<td>{{new Date(orderShow.endTime).toLocaleString()}}</td>
+		</tr>
+	</table>
+</section>

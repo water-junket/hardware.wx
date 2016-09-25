@@ -21,7 +21,7 @@ public class UserService {
 		if(tokens.containsKey(u.getId())){
 			return tokens.get(u.getId()).equals(u.getToken());
 		}else{
-			User user = userDao.select(u.getName());
+			User user = userDao.select(u.getTel());
 			if(user != null && u.getToken().equals(user.getToken())){
 				tokens.put(user.getId(), user.getToken());
 				return true;

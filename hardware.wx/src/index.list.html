@@ -1,13 +1,18 @@
-<header>
-	<input type="text" ms-duplex="search">
-	<i></i>
-	<i></i>
+<header class="search">
+	<i class="icon-search"></i><input type="text" ms-duplex="search" placeholder="请输入检索关键字"><a ms-click="loadGoods(1)">搜索</a>
 </header>
+<section class="btns">
+	<a ms-class="cur:ob=='name asc'" ms-click="setOb('name asc')">名称</a>
+	<a ms-class="cur:ob=='price asc,dummyPrice asc'" ms-click="setOb('price asc,dummyPrice asc')">价格</a>
+	<a ms-class="cur:category2Show" ms-click="popupCat"><i class="icon-menu"></i>&nbsp;&nbsp;分类</a>
+</section>
+<section class="category" ms-if="category2Show">
+	<a ms-repeat="category2" ms-attr-href="#!/list?id={{el.id}}&list={{el.parent}}">{{el.name}}</a>
+</section>
 <a ms-repeat="goodsList" class="list" ms-attr-href="#!/detail?id={{el.id}}">
 	<img ms-if="el.img!=0" ms-attr-src="imgSrc(el.img)">
 	<section>
 		<header>{{el.name}}</header>
-		<article class="price">&yen;{{el.price}}<div>&yen;{{el.dummyPrice}}</div></article>
-		<article class="param">{{el.param}}</article>
+		<article class="price"><i ms-if="el.act" class="icon-price-tags"></i>&yen;{{el.price}}~&yen;{{el.dummyPrice}}</article>
 	</section>
 </a>

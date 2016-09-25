@@ -44,6 +44,7 @@ public class OrderSearch {
 		else if(type==2) sb.append(" and status=10");
 		else if(type==3) sb.append(" and status=20");
 		else if(type==4) sb.append(" and status=-1");
+		else if(type==5) sb.append(" and status=-2");
 		if(oid!=null && !oid.equals("")) sb.append(" and id=\'").append(oid).append("\'");
 		if(payMethod!=-1) sb.append(" and payMethod=").append(payMethod);
 		if(begin!=null && !begin.equals("")) sb.append(" and orderTime>cast(\'").append(begin).append("\' as datetime)");

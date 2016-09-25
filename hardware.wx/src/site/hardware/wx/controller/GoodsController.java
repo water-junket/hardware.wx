@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import site.hardware.wx.bean.Goods;
 import site.hardware.wx.bean.Odata;
+import site.hardware.wx.bean.SubGoods;
 import site.hardware.wx.service.GoodsService;
 import site.hardware.wx.service.OdataService;
 
@@ -55,4 +56,9 @@ public class GoodsController {
 		return hm;
 	}
 
+	@RequestMapping(value="/listSub", method = RequestMethod.POST)
+	@ResponseBody
+	public List<SubGoods> listSub(@RequestParam("parent") int parent){
+		return goodsService.listSubAvailable(parent);
+	}
 }

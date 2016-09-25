@@ -39,6 +39,9 @@ footer{
 	padding: 0px;
 	border-radius: 3px;
 	box-shadow: 4px 2px 1px fade(darken(@main-color,40%),50%);
+	&.disabled{
+		background-color: @shadow-color;
+	}
 }
 
 hr{
@@ -49,4 +52,20 @@ hr{
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
+}
+
+ul{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.mask{
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	background-color: fade(@shadow-color,50%);
+	top: 0;
+	left: 0;
+	z-index: 20;
 }

@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('/fonts/icomoon.eot?lt1k9g');
-  src:  url('/fonts/icomoon.eot?lt1k9g#iefix') format('embedded-opentype'),
-    url('/fonts/icomoon.ttf?lt1k9g') format('truetype'),
-    url('/fonts/icomoon.woff?lt1k9g') format('woff'),
-    url('/fonts/icomoon.svg?lt1k9g#icomoon') format('svg');
+  src:  url('/fonts/icomoon.eot?exdgxe');
+  src:  url('/fonts/icomoon.eot?exdgxe#iefix') format('embedded-opentype'),
+    url('/fonts/icomoon.ttf?exdgxe') format('truetype'),
+    url('/fonts/icomoon.woff?exdgxe') format('woff'),
+    url('/fonts/icomoon.svg?exdgxe#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -44,6 +44,9 @@
 }
 .icon-file-text2:before {
   content: "\e926";
+}
+.icon-price-tags:before {
+  content: "\e936";
 }
 .icon-coin-yen:before {
   content: "\e93e";
